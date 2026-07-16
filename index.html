@@ -152,18 +152,29 @@
     display:inline-block;font-family:'Baloo 2',cursive;font-weight:800;font-size:22px;
     color:var(--coral-deep);background:#FFE6E0;padding:3px 14px;border-radius:999px;margin-bottom:10px;
   }
+  .timeline-card{
+    background:var(--card);border-radius:22px;padding:14px 14px 4px;
+    box-shadow:0 4px 14px rgba(46,36,64,.06);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .timeline-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(46,36,64,.20);
+  }
   .timeline-thumb{
     position:relative;width:100%;aspect-ratio:3/4;border-radius:16px;overflow:hidden;margin-bottom:10px;
+    background:#FAF7F2;
   }
   .timeline-thumb.landscape{aspect-ratio:16/9;}
-  .timeline-thumb img{width:100%;height:100%;object-fit:cover;display:none;}
+  .timeline-thumb img{width:100%;height:100%;object-fit:contain;display:none;transition:transform .4s ease;}
+  .timeline-card:hover .timeline-thumb img{transform:scale(1.08);}
   .timeline-thumb .thumb-fallback{
     width:100%;height:100%;background:#FAF7F2;border:2px dashed rgba(46,36,64,.15);border-radius:16px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);
   }
   .timeline-thumb .thumb-fallback svg{width:24px;height:24px;}
   .timeline-thumb .thumb-fallback span{font-size:11px;font-weight:800;}
-  .timeline-item p{margin:0;font-size:14px;color:var(--muted);font-weight:700;line-height:1.6;}
+  .timeline-item p{margin:0;padding-bottom:14px;font-size:14px;color:var(--muted);font-weight:700;line-height:1.6;}
   @media(max-width:680px){
     .timeline::before{left:18px;}
     .timeline-item, .timeline-item.left, .timeline-item.right{
@@ -369,51 +380,63 @@
     <div class="timeline">
       <div class="timeline-item left">
         <div class="timeline-year">2021</div>
-        <div class="timeline-thumb landscape">
+        <div class="timeline-card">
+          <div class="timeline-thumb landscape">
           <img src="2021.jpg" alt="2021" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
           <div class="thumb-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg><span>Image coming soon</span></div>
         </div>
         <p>Started playing Play Together in February — first island, first pets, first steps into the world.</p>
+        </div>
       </div>
       <div class="timeline-item right">
         <div class="timeline-year">2022</div>
-        <div class="timeline-thumb">
+        <div class="timeline-card">
+          <div class="timeline-thumb">
           <img src="2022.PNG" alt="2022" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
           <div class="thumb-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg><span>Image coming soon</span></div>
         </div>
         <p>Grew the pet collection and started exploring the derby and fishing minigames.</p>
+        </div>
       </div>
       <div class="timeline-item left">
         <div class="timeline-year">2023</div>
-        <div class="timeline-thumb">
+        <div class="timeline-card">
+          <div class="timeline-thumb">
           <img src="2023.PNG" alt="2023" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
           <div class="thumb-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg><span>Image coming soon</span></div>
         </div>
         <p>Built out my first proper houses and started chasing VIP bears.</p>
+        </div>
       </div>
       <div class="timeline-item right">
         <div class="timeline-year">2024</div>
-        <div class="timeline-thumb">
+        <div class="timeline-card">
+          <div class="timeline-thumb">
           <img src="2024.jpg" alt="2024" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
           <div class="thumb-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg><span>Image coming soon</span></div>
         </div>
         <p>Broke into the top ranks of Zombie mode for the first time on the Asia server.</p>
+        </div>
       </div>
       <div class="timeline-item left">
         <div class="timeline-year">2025</div>
-        <div class="timeline-thumb">
+        <div class="timeline-card">
+          <div class="timeline-thumb">
           <img src="2025.jpg" alt="2025" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
           <div class="thumb-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg><span>Image coming soon</span></div>
         </div>
         <p>Kept climbing — collection growing, garage filling up, derby wins stacking.</p>
+        </div>
       </div>
       <div class="timeline-item right">
         <div class="timeline-year">2026</div>
-        <div class="timeline-thumb">
+        <div class="timeline-card">
+          <div class="timeline-thumb">
           <img src="2026.jpg" alt="2026" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
           <div class="thumb-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg><span>Image coming soon</span></div>
         </div>
         <p>Reached #1 Zombie on the Asia server — currently defending the top spot.</p>
+        </div>
       </div>
     </div>
 
