@@ -319,6 +319,11 @@
   .status-pill.is-active .status-dot{background:#2ECC71;box-shadow:0 0 0 4px rgba(46,204,113,.22);animation:pulseDot 1.8s ease-in-out infinite;}
   .status-pill.is-inactive{background:#FBE3E0;color:#9A2E20;}
   .status-pill.is-inactive .status-dot{background:#E5533D;}
+
+  /* ---------- VIEWS COUNTER ---------- */
+  .views-pill{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;padding:6px 16px;border-radius:999px;margin-top:14px;background:var(--sky);color:var(--sky-deep);}
+  .views-pill svg{width:16px;height:16px;flex-shrink:0;}
+  .views-pill #viewsCount{font-family:'Baloo 2',cursive;font-weight:800;}
   @keyframes pulseDot{0%,100%{box-shadow:0 0 0 4px rgba(46,204,113,.22);}50%{box-shadow:0 0 0 7px rgba(46,204,113,.08);}}
   .about p{margin:0 0 18px;color:var(--muted);font-weight:700;line-height:1.6;}
   .btn-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -428,6 +433,10 @@
       </div>
     </div>
     <p class="tag" data-i18n="hero-tag">Collecting pets on the island since Feb 2021</p>
+    <div class="views-pill" id="viewsPill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span id="viewsCount">…</span><span data-i18n="views-label">views</span>
+    </div>
   </div>
 
   <div class="wrap">
@@ -699,10 +708,44 @@
 
     <h3 class="subsection-heading"><span class="dot-tag" style="background:var(--sky-deep);"></span><span data-i18n="cars-heading">Cars</span></h3>
     <p class="subsection-sub" data-i18n="cars-sub">Garage lineup — screenshots coming soon</p>
-    <div class="gallery-grid">
-      <div class="gallery-card"><div class="gallery-thumb"><img src="car-1.jpg" alt="Car #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Car #1</div><div class="meta">Add model + rarity</div></div></div>
-      <div class="gallery-card"><div class="gallery-thumb"><img src="car-2.jpg" alt="Car #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Car #2</div><div class="meta">Add model + rarity</div></div></div>
-      <div class="gallery-card"><div class="gallery-thumb"><img src="car-3.jpg" alt="Car #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Car #3</div><div class="meta">Add model + rarity</div></div></div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-subtab="auto" data-i18n="nav-auto">Auto</button>
+      <button class="sub-tab" data-subtab="marine" data-i18n="nav-marine">Marine</button>
+      <button class="sub-tab" data-subtab="moto" data-i18n="nav-moto">Moto</button>
+      <button class="sub-tab" data-subtab="aerial" data-i18n="nav-aerial">Aerial</button>
+    </div>
+
+    <div class="sub-panel active" id="subtab-auto">
+      <div class="gallery-grid">
+        <div class="gallery-card"><div class="gallery-thumb"><img src="car-1.jpg" alt="Auto #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Auto #1</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="car-2.jpg" alt="Auto #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Auto #2</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="car-3.jpg" alt="Auto #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6h14l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Auto #3</div><div class="meta">Add model + rarity</div></div></div>
+      </div>
+    </div>
+
+    <div class="sub-panel" id="subtab-marine">
+      <div class="gallery-grid">
+        <div class="gallery-card"><div class="gallery-thumb"><img src="marine-1.jpg" alt="Marine #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 17c1.5 1.5 3.5 1.5 5 0s3.5-1.5 5 0 3.5 1.5 5 0 3.5-1.5 5 0"/><path d="M4 14l1.5-6h9L18 14"/><path d="M9.5 8V4h2l1.5 4"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Marine #1</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="marine-2.jpg" alt="Marine #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 17c1.5 1.5 3.5 1.5 5 0s3.5-1.5 5 0 3.5 1.5 5 0 3.5-1.5 5 0"/><path d="M4 14l1.5-6h9L18 14"/><path d="M9.5 8V4h2l1.5 4"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Marine #2</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="marine-3.jpg" alt="Marine #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 17c1.5 1.5 3.5 1.5 5 0s3.5-1.5 5 0 3.5 1.5 5 0 3.5-1.5 5 0"/><path d="M4 14l1.5-6h9L18 14"/><path d="M9.5 8V4h2l1.5 4"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Marine #3</div><div class="meta">Add model + rarity</div></div></div>
+      </div>
+    </div>
+
+    <div class="sub-panel" id="subtab-moto">
+      <div class="gallery-grid">
+        <div class="gallery-card"><div class="gallery-thumb"><img src="moto-1.jpg" alt="Moto #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="18.5" cy="17.5" r="2.5"/><path d="M15 17.5H9l-2-5h9l2 5h-1"/><path d="M9 12l1.5-4h3"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Moto #1</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="moto-2.jpg" alt="Moto #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="18.5" cy="17.5" r="2.5"/><path d="M15 17.5H9l-2-5h9l2 5h-1"/><path d="M9 12l1.5-4h3"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Moto #2</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="moto-3.jpg" alt="Moto #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="18.5" cy="17.5" r="2.5"/><path d="M15 17.5H9l-2-5h9l2 5h-1"/><path d="M9 12l1.5-4h3"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Moto #3</div><div class="meta">Add model + rarity</div></div></div>
+      </div>
+    </div>
+
+    <div class="sub-panel" id="subtab-aerial">
+      <div class="gallery-grid">
+        <div class="gallery-card"><div class="gallery-thumb"><img src="aerial-1.jpg" alt="Aerial #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 16l8-2 6-8 2 1-4 8 5-1 2 2-6 2-3 4-2-1 2-4-6 1z"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Aerial #1</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="aerial-2.jpg" alt="Aerial #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 16l8-2 6-8 2 1-4 8 5-1 2 2-6 2-3 4-2-1 2-4-6 1z"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Aerial #2</div><div class="meta">Add model + rarity</div></div></div>
+        <div class="gallery-card"><div class="gallery-thumb"><img src="aerial-3.jpg" alt="Aerial #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="gallery-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 16l8-2 6-8 2 1-4 8 5-1 2 2-6 2-3 4-2-1 2-4-6 1z"/></svg><span>Image coming soon</span></div></div><div class="gallery-caption"><div class="name">Aerial #3</div><div class="meta">Add model + rarity</div></div></div>
+      </div>
     </div>
 
     <h3 class="subsection-heading"><span class="dot-tag" style="background:var(--lilac-deep);"></span><span data-i18n="vip-heading">VIP bears</span></h3>
@@ -763,24 +806,45 @@
 
     <div class="news-list">
       <div class="news-card">
-        <div class="news-date"><span class="d-num">01</span><span class="d-mon" data-i18n="news1-mon">Jul</span></div>
+        <div class="news-date"><span class="d-num">27</span><span class="d-mon" data-i18n="news1-mon">Jul</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news1-title">Reached 30,000 Zombie Wins</span><span class="news-tag" data-i18n="news-tag-milestone">Milestone</span></div>
-          <p data-i18n="news1-text">Hit a brand new personal record while defending the #1 Zombie rank on the Asia server.</p>
+          <div class="news-title"><span data-i18n="news1-title">Got the Princess Darkness Wings in just 1 draw</span><span class="news-tag" data-i18n="news-tag-gacha">Gacha</span></div>
+          <p data-i18n="news1-text">Pulled the Princess Darkness Wings outfit on the very first try — an incredibly lucky single draw.</p>
         </div>
       </div>
       <div class="news-card">
-        <div class="news-date"><span class="d-num">18</span><span class="d-mon" data-i18n="news2-mon">Jun</span></div>
+        <div class="news-date"><span class="d-num">27</span><span class="d-mon" data-i18n="news2-mon">Jul</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news2-title">Page redesigned</span><span class="news-tag" data-i18n="news-tag-update">Update</span></div>
-          <p data-i18n="news2-text">Added a News tab, language switcher, and a smoother timeline so friends can follow along more easily.</p>
+          <div class="news-title"><span data-i18n="news2-title">Caught the Beluga Sturgeon Aurora</span><span class="news-tag" data-i18n="news-tag-catch">Catch</span></div>
+          <p data-i18n="news2-text">Reeled in a rare Beluga Sturgeon Aurora while fishing — one of the rarest catches yet.</p>
         </div>
       </div>
       <div class="news-card">
-        <div class="news-date"><span class="d-num">05</span><span class="d-mon" data-i18n="news3-mon">May</span></div>
+        <div class="news-date"><span class="d-num">25</span><span class="d-mon" data-i18n="news3-mon">Jul</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news3-title">New derby run added</span><span class="news-tag" data-i18n="news-tag-derby">Derby</span></div>
-          <p data-i18n="news3-text">Fresh screenshots from the latest derby event — check the Derby tab for the full gallery.</p>
+          <div class="news-title"><span data-i18n="news3-title">Done the Princess Heart event</span><span class="news-tag" data-i18n="news-tag-event">Event</span></div>
+          <p data-i18n="news3-text">Completed all stages of the Princess Heart event and claimed the rewards.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-date"><span class="d-num">01</span><span class="d-mon" data-i18n="news4-mon">Jul</span></div>
+        <div class="news-body">
+          <div class="news-title"><span data-i18n="news4-title">Reached 30,000 Zombie Wins</span><span class="news-tag" data-i18n="news-tag-milestone">Milestone</span></div>
+          <p data-i18n="news4-text">Hit a brand new personal record while defending the #1 Zombie rank on the Asia server.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-date"><span class="d-num">18</span><span class="d-mon" data-i18n="news5-mon">Jun</span></div>
+        <div class="news-body">
+          <div class="news-title"><span data-i18n="news5-title">Page redesigned</span><span class="news-tag" data-i18n="news-tag-update">Update</span></div>
+          <p data-i18n="news5-text">Added a News tab, language switcher, and a smoother timeline so friends can follow along more easily.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-date"><span class="d-num">05</span><span class="d-mon" data-i18n="news6-mon">May</span></div>
+        <div class="news-body">
+          <div class="news-title"><span data-i18n="news6-title">New derby run added</span><span class="news-tag" data-i18n="news-tag-derby">Derby</span></div>
+          <p data-i18n="news6-text">Fresh screenshots from the latest derby event — check the Derby tab for the full gallery.</p>
         </div>
       </div>
     </div>
@@ -799,7 +863,7 @@
       </div>
       <div>
         <span class="since" data-i18n="about-since">Playing since Feb 2021</span>
-        <span class="status-pill is-active" id="statusPill"><span class="status-dot"></span><span data-i18n="about-status">Active</span></span>
+        <span class="status-pill is-active" id="statusPill"><span class="status-dot"></span><span data-i18n="about-status">Active Player</span></span>
         <h2 data-i18n="about-heading">Hey, I'm Raijin</h2>
         <p data-i18n="about-text">Island builder, pet collector, and reigning #1 zombie on the Asia server. This page tracks my Play Together progress — screenshots going up soon.</p>
         <div class="btn-row">
@@ -870,7 +934,8 @@
   const translations = {
     en: {
       'nav-home':'Homepage','nav-about':'About me','nav-news':'News','nav-derby':'Derby','nav-collection':'Collection','nav-activities':'Activities','nav-drawing':'Drawing','nav-cosplay':'Cosplay','nav-contact':'Contact me',
-      'hero-eyebrow':'Play Together • Player card','hero-tag':'Collecting pets on the island since Feb 2021',
+      'nav-auto':'Auto','nav-marine':'Marine','nav-moto':'Moto','nav-aerial':'Aerial',
+      'hero-eyebrow':'Play Together • Player card','hero-tag':'Collecting pets on the island since Feb 2021','views-label':' views',
       'badge-title':'#1 Zombie — Asia server','badge-sub':'Top ranked',
       'level-label':'Level 26','level-xp':'25 / 30 XP to Level 27',
       'stats-heading':'My Play Together stats','stats-sub':'Numbers updated every week',
@@ -900,18 +965,22 @@
       'cars-heading':'Cars','cars-sub':'Garage lineup — screenshots coming soon',
       'vip-heading':'VIP bears','vip-sub':'Screenshots coming soon',
       'activities-heading':'Activities','activities-sub':'Drawing and cosplay — the creative side of things',
-      'about-since':'Playing since Feb 2021','about-status':'Active','about-heading':"Hey, I'm Raijin",
+      'about-since':'Playing since Feb 2021','about-status':'Active Player','about-heading':"Hey, I'm Raijin",
       'about-text':'Island builder, pet collector, and reigning #1 zombie on the Asia server. This page tracks my Play Together progress — screenshots going up soon.',
       'about-download-btn':'Download Play Together',
       'news-heading':'News & Updates','news-sub':'The latest from my island — edit these anytime',
-      'news1-mon':'Jul','news1-title':'Reached 30,000 Zombie Wins','news1-text':'Hit a brand new personal record while defending the #1 Zombie rank on the Asia server.',
-      'news2-mon':'Jun','news2-title':'Page redesigned','news2-text':'Added a News tab, language switcher, and a smoother timeline so friends can follow along more easily.',
-      'news3-mon':'May','news3-title':'New derby run added','news3-text':'Fresh screenshots from the latest derby event — check the Derby tab for the full gallery.',
-      'news-tag-milestone':'Milestone','news-tag-update':'Update','news-tag-derby':'Derby'
+      'news1-mon':'Jul','news1-title':'Got the Princess Darkness Wings in just 1 draw','news1-text':'Pulled the Princess Darkness Wings outfit on the very first try — an incredibly lucky single draw.',
+      'news2-mon':'Jul','news2-title':'Caught the Beluga Sturgeon Aurora','news2-text':'Reeled in a rare Beluga Sturgeon Aurora while fishing — one of the rarest catches yet.',
+      'news3-mon':'Jul','news3-title':'Done the Princess Heart event','news3-text':'Completed all stages of the Princess Heart event and claimed the rewards.',
+      'news4-mon':'Jul','news4-title':'Reached 30,000 Zombie Wins','news4-text':'Hit a brand new personal record while defending the #1 Zombie rank on the Asia server.',
+      'news5-mon':'Jun','news5-title':'Page redesigned','news5-text':'Added a News tab, language switcher, and a smoother timeline so friends can follow along more easily.',
+      'news6-mon':'May','news6-title':'New derby run added','news6-text':'Fresh screenshots from the latest derby event — check the Derby tab for the full gallery.',
+      'news-tag-milestone':'Milestone','news-tag-update':'Update','news-tag-derby':'Derby','news-tag-gacha':'Gacha','news-tag-catch':'Catch','news-tag-event':'Event'
     },
     vi: {
       'nav-home':'Trang chủ','nav-about':'Giới thiệu','nav-news':'Tin tức','nav-derby':'Đua ngựa','nav-collection':'Bộ sưu tập','nav-activities':'Hoạt động','nav-drawing':'Vẽ tranh','nav-cosplay':'Cosplay','nav-contact':'Liên hệ',
-      'hero-eyebrow':'Play Together • Thẻ người chơi','hero-tag':'Sưu tầm thú cưng trên đảo từ tháng 2/2021',
+      'nav-auto':'Ô tô','nav-marine':'Tàu thuyền','nav-moto':'Mô tô','nav-aerial':'Máy bay',
+      'hero-eyebrow':'Play Together • Thẻ người chơi','hero-tag':'Sưu tầm thú cưng trên đảo từ tháng 2/2021','views-label':' lượt xem',
       'badge-title':'#1 Zombie — Máy chủ Châu Á','badge-sub':'Hạng cao nhất',
       'level-label':'Cấp 26','level-xp':'25 / 30 XP để lên Cấp 27',
       'stats-heading':'Thống kê Play Together của tôi','stats-sub':'Số liệu cập nhật mỗi tuần',
@@ -941,18 +1010,22 @@
       'cars-heading':'Xe hơi','cars-sub':'Bộ sưu tập garage — ảnh chụp màn hình sắp có',
       'vip-heading':'Gấu VIP','vip-sub':'Ảnh chụp màn hình sắp có',
       'activities-heading':'Hoạt động','activities-sub':'Vẽ tranh và cosplay — khía cạnh sáng tạo',
-      'about-since':'Chơi từ tháng 2/2021','about-status':'Đang hoạt động','about-heading':'Xin chào, tôi là Raijin',
+      'about-since':'Chơi từ tháng 2/2021','about-status':'Người chơi đang hoạt động','about-heading':'Xin chào, tôi là Raijin',
       'about-text':'Người xây đảo, sưu tầm thú cưng, và đang giữ hạng #1 Zombie tại máy chủ Châu Á. Trang này theo dõi tiến trình Play Together của tôi — ảnh chụp màn hình sẽ sớm được cập nhật.',
       'about-download-btn':'Tải Play Together',
       'news-heading':'Tin tức & Cập nhật','news-sub':'Những tin mới nhất từ hòn đảo của tôi — chỉnh sửa bất cứ lúc nào',
-      'news1-mon':'Th7','news1-title':'Đạt 30.000 lượt thắng Zombie','news1-text':'Lập kỷ lục cá nhân mới trong khi bảo vệ hạng #1 Zombie tại máy chủ Châu Á.',
-      'news2-mon':'Th6','news2-title':'Trang web được thiết kế lại','news2-text':'Thêm tab Tin tức, bộ chuyển đổi ngôn ngữ và dòng thời gian mượt mà hơn để bạn bè dễ theo dõi hơn.',
-      'news3-mon':'Th5','news3-title':'Thêm lượt đua ngựa mới','news3-text':'Ảnh chụp màn hình mới từ sự kiện đua ngựa gần đây — xem tab Đua ngựa để biết toàn bộ thư viện ảnh.',
-      'news-tag-milestone':'Cột mốc','news-tag-update':'Cập nhật','news-tag-derby':'Đua ngựa'
+      'news1-mon':'Th7','news1-title':'Nhận được Princess Darkness Wings chỉ trong 1 lượt quay','news1-text':'Quay trúng trang phục Princess Darkness Wings ngay lần đầu tiên — một lượt quay đơn cực kỳ may mắn.',
+      'news2-mon':'Th7','news2-title':'Câu được cá Beluga Sturgeon Aurora','news2-text':'Câu được cá Beluga Sturgeon Aurora hiếm trong lúc câu cá — một trong những lần câu hiếm nhất từ trước đến nay.',
+      'news3-mon':'Th7','news3-title':'Hoàn thành sự kiện Princess Heart','news3-text':'Hoàn thành tất cả các chặng của sự kiện Princess Heart và nhận phần thưởng.',
+      'news4-mon':'Th7','news4-title':'Đạt 30.000 lượt thắng Zombie','news4-text':'Lập kỷ lục cá nhân mới trong khi bảo vệ hạng #1 Zombie tại máy chủ Châu Á.',
+      'news5-mon':'Th6','news5-title':'Trang web được thiết kế lại','news5-text':'Thêm tab Tin tức, bộ chuyển đổi ngôn ngữ và dòng thời gian mượt mà hơn để bạn bè dễ theo dõi hơn.',
+      'news6-mon':'Th5','news6-title':'Thêm lượt đua ngựa mới','news6-text':'Ảnh chụp màn hình mới từ sự kiện đua ngựa gần đây — xem tab Đua ngựa để biết toàn bộ thư viện ảnh.',
+      'news-tag-milestone':'Cột mốc','news-tag-update':'Cập nhật','news-tag-derby':'Đua ngựa','news-tag-gacha':'Quay thưởng','news-tag-catch':'Câu cá','news-tag-event':'Sự kiện'
     },
     th: {
       'nav-home':'หน้าแรก','nav-about':'เกี่ยวกับฉัน','nav-news':'ข่าวสาร','nav-derby':'ดาร์บี้','nav-collection':'คอลเลกชัน','nav-activities':'กิจกรรม','nav-drawing':'วาดภาพ','nav-cosplay':'คอสเพลย์','nav-contact':'ติดต่อฉัน',
-      'hero-eyebrow':'Play Together • การ์ดผู้เล่น','hero-tag':'สะสมสัตว์เลี้ยงบนเกาะตั้งแต่ก.พ. 2021',
+      'nav-auto':'รถยนต์','nav-marine':'เรือ','nav-moto':'มอเตอร์ไซค์','nav-aerial':'เครื่องบิน',
+      'hero-eyebrow':'Play Together • การ์ดผู้เล่น','hero-tag':'สะสมสัตว์เลี้ยงบนเกาะตั้งแต่ก.พ. 2021','views-label':' ครั้งที่เข้าชม',
       'badge-title':'#1 ซอมบี้ — เซิร์ฟเวอร์เอเชีย','badge-sub':'อันดับสูงสุด',
       'level-label':'เลเวล 26','level-xp':'25 / 30 XP สู่เลเวล 27',
       'stats-heading':'สถิติ Play Together ของฉัน','stats-sub':'อัปเดตตัวเลขทุกสัปดาห์',
@@ -982,14 +1055,17 @@
       'cars-heading':'รถยนต์','cars-sub':'คอลเลกชันโรงรถ — ภาพหน้าจอเร็วๆ นี้',
       'vip-heading':'หมี VIP','vip-sub':'ภาพหน้าจอเร็วๆ นี้',
       'activities-heading':'กิจกรรม','activities-sub':'วาดภาพและคอสเพลย์ — ด้านความคิดสร้างสรรค์',
-      'about-since':'เล่นตั้งแต่ก.พ. 2021','about-status':'ออนไลน์','about-heading':'สวัสดี ฉันคือ Raijin',
+      'about-since':'เล่นตั้งแต่ก.พ. 2021','about-status':'ผู้เล่นที่ใช้งานอยู่','about-heading':'สวัสดี ฉันคือ Raijin',
       'about-text':'นักสร้างเกาะ นักสะสมสัตว์เลี้ยง และแชมป์ซอมบี้อันดับ #1 บนเซิร์ฟเวอร์เอเชีย เพจนี้ติดตามความคืบหน้า Play Together ของฉัน — ภาพหน้าจอกำลังจะมาเร็วๆ นี้',
       'about-download-btn':'ดาวน์โหลด Play Together',
       'news-heading':'ข่าวสารและอัปเดต','news-sub':'ข่าวล่าสุดจากเกาะของฉัน — แก้ไขได้ตลอดเวลา',
-      'news1-mon':'ก.ค.','news1-title':'ทำชัยชนะซอมบี้ถึง 30,000 ครั้ง','news1-text':'ทำสถิติส่วนตัวใหม่ขณะป้องกันอันดับ #1 ซอมบี้บนเซิร์ฟเวอร์เอเชีย',
-      'news2-mon':'มิ.ย.','news2-title':'ออกแบบเพจใหม่','news2-text':'เพิ่มแท็บข่าวสาร ตัวสลับภาษา และไทม์ไลน์ที่ลื่นไหลขึ้นเพื่อให้เพื่อนๆ ติดตามได้ง่ายขึ้น',
-      'news3-mon':'พ.ค.','news3-title':'เพิ่มการวิ่งดาร์บี้ใหม่','news3-text':'ภาพหน้าจอใหม่จากอีเวนต์ดาร์บี้ล่าสุด — ดูแท็บดาร์บี้เพื่อชมแกลเลอรีทั้งหมด',
-      'news-tag-milestone':'เหตุการณ์สำคัญ','news-tag-update':'อัปเดต','news-tag-derby':'ดาร์บี้'
+      'news1-mon':'ก.ค.','news1-title':'ได้รับ Princess Darkness Wings ในการสุ่มเพียง 1 ครั้ง','news1-text':'สุ่มได้ชุด Princess Darkness Wings ในการสุ่มครั้งแรกเลย — โชคดีสุดๆ',
+      'news2-mon':'ก.ค.','news2-title':'จับปลา Beluga Sturgeon Aurora ได้','news2-text':'ตกปลา Beluga Sturgeon Aurora ตัวหายากได้ระหว่างตกปลา — หนึ่งในการจับที่หายากที่สุด',
+      'news3-mon':'ก.ค.','news3-title':'ทำอีเวนต์ Princess Heart สำเร็จ','news3-text':'ผ่านทุกด่านของอีเวนต์ Princess Heart และรับรางวัลเรียบร้อยแล้ว',
+      'news4-mon':'ก.ค.','news4-title':'ทำชัยชนะซอมบี้ถึง 30,000 ครั้ง','news4-text':'ทำสถิติส่วนตัวใหม่ขณะป้องกันอันดับ #1 ซอมบี้บนเซิร์ฟเวอร์เอเชีย',
+      'news5-mon':'มิ.ย.','news5-title':'ออกแบบเพจใหม่','news5-text':'เพิ่มแท็บข่าวสาร ตัวสลับภาษา และไทม์ไลน์ที่ลื่นไหลขึ้นเพื่อให้เพื่อนๆ ติดตามได้ง่ายขึ้น',
+      'news6-mon':'พ.ค.','news6-title':'เพิ่มการวิ่งดาร์บี้ใหม่','news6-text':'ภาพหน้าจอใหม่จากอีเวนต์ดาร์บี้ล่าสุด — ดูแท็บดาร์บี้เพื่อชมแกลเลอรีทั้งหมด',
+      'news-tag-milestone':'เหตุการณ์สำคัญ','news-tag-update':'อัปเดต','news-tag-derby':'ดาร์บี้','news-tag-gacha':'สุ่มไอเทม','news-tag-catch':'จับปลา','news-tag-event':'อีเวนต์'
     }
   };
 
@@ -1004,6 +1080,20 @@
   }
 
   const start = new Date(2021, 1, 1);
+
+  /* ---------- VIEW COUNTER ---------- */
+  /* Increments a real, global counter each time this page is loaded (once per visit). */
+  (function trackView(){
+    const viewsCountEl = document.getElementById('viewsCount');
+    if (!viewsCountEl) return;
+    const namespace = 'raijin-playtogether-stats';
+    const key = 'page-views';
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+      .then(res => res.json())
+      .then(data => { viewsCountEl.textContent = (data.value || 0).toLocaleString(); })
+      .catch(() => { viewsCountEl.textContent = '—'; });
+  })();
+
   const now = new Date();
   let years = now.getFullYear() - start.getFullYear();
   const monthDiff = now.getMonth() - start.getMonth();
