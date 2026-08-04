@@ -40,9 +40,24 @@
   /* ---------- NAV ---------- */
   .nav{position:sticky;top:0;z-index:50;background:rgba(255,248,239,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(46,36,64,.08);}
   .nav-inner{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-  .nav-logo{display:flex;align-items:center;font-family:'Baloo 2',cursive;font-weight:800;font-size:20px;color:var(--plum);text-decoration:none;flex-shrink:0;}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
   .nav-logo img{display:block;height:34px;width:auto;max-width:160px;object-fit:contain;}
   .nav-logo .nav-logo-fallback{display:none;}
+  .logo-word{
+    align-items:flex-end;position:relative;
+    font-family:'Baloo 2',cursive;font-weight:800;font-size:23px;letter-spacing:.01em;
+    color:#1274D8;line-height:1;
+    padding-bottom:5px;
+    background-image:linear-gradient(#1274D8,#1274D8);
+    background-repeat:no-repeat;
+    background-position:0 100%;
+    background-size:100% 3px;
+    transition:transform .2s ease;
+  }
+  .nav-logo:hover .logo-word{transform:translateY(-1px);}
+  .logo-i{position:relative;display:inline-flex;align-items:flex-end;justify-content:center;width:9px;height:1em;margin:0 1px;}
+  .logo-i-stem{width:5px;height:76%;background:currentColor;border-radius:2px;}
+  .logo-sun{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:14px;height:14px;overflow:visible;}
   .nav-tabs{display:flex;gap:6px;flex-wrap:wrap;}
   .nav-tab{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--muted);background:none;border:none;cursor:pointer;padding:8px 14px;border-radius:999px;transition:all .2s ease;}
   .nav-tab:hover{background:var(--mint);color:var(--mint-deep);}
@@ -102,6 +117,42 @@
   .hero-avatar-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--plum);}
   .hero-avatar-fallback svg{width:26px;height:26px;}
   .hero-avatar-fallback span{font-size:10px;font-weight:800;}
+
+  /* ---------- PROFILE CARD ---------- */
+  .profile-card{
+    position:relative;z-index:1;max-width:360px;margin:8px auto 0;
+    background:linear-gradient(180deg,#ffffff,#FFFCF5);
+    border-radius:30px;padding:26px 26px 24px;
+    box-shadow:0 18px 42px rgba(46,36,64,.12), 0 0 0 1px rgba(46,36,64,.04);
+  }
+  .profile-name{
+    position:relative;z-index:1;font-family:'Baloo 2',cursive;font-weight:800;
+    font-size:clamp(32px,6vw,44px);margin:14px 0 2px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .verified-badge{width:22px;height:22px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(24,95,165,.35));}
+  .hero-avatar-wrap{position:relative;width:104px;margin:6px auto 4px;}
+  .hero-avatar-wrap .hero-avatar{margin:0;}
+  .status-dot-avatar{
+    position:absolute;top:0;right:-2px;width:17px;height:17px;border-radius:50%;
+    background:#2ECC71;border:3px solid #fff;box-shadow:0 0 0 3px rgba(46,204,113,.22);
+    animation:pulseDot 1.8s ease-in-out infinite;
+  }
+  .level-chip-avatar{
+    position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--gold),var(--sun));color:#5A3E00;
+    font-family:'Baloo 2',cursive;font-weight:800;font-size:12px;letter-spacing:.02em;
+    padding:3px 11px;border-radius:999px;border:3px solid #fff;
+    box-shadow:0 4px 10px rgba(255,183,3,.4);white-space:nowrap;
+  }
+  .profile-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px;}
+  .profile-pill{
+    display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;
+    color:var(--muted);background:#FAF7F2;padding:6px 12px;border-radius:999px;
+  }
+  .profile-pill svg{width:12px;height:12px;flex-shrink:0;stroke:var(--coral-deep);}
+  .profile-pill.is-rank{color:var(--sun-deep);background:#FFF3D6;}
+  .profile-pill.is-rank svg{stroke:var(--sun-deep);}
 
   /* ---------- BADGE ---------- */
   .badge-section{display:flex;justify-content:center;margin:32px 0 10px;position:relative;z-index:1;}
@@ -334,13 +385,32 @@
   .contact-btn-inline:hover{transform:translateY(-2px);}
   .gh-btn svg{width:18px;height:18px;fill:none;stroke:#fff;}
 
-  footer{text-align:center;margin-top:56px;font-size:12px;color:var(--muted);font-weight:700;line-height:1.7;}
-  .footer-social{display:flex;justify-content:center;gap:14px;margin-bottom:16px;}
-  .footer-social a{width:40px;height:40px;border-radius:50%;background:var(--card);box-shadow:0 4px 12px rgba(46,36,64,.08);display:flex;align-items:center;justify-content:center;transition:transform .2s ease, background .2s ease, box-shadow .2s ease;flex-shrink:0;}
-  .footer-social a svg{width:18px;height:18px;fill:var(--plum);}
-  .footer-social a:hover{transform:translateY(-3px);background:var(--coral);box-shadow:0 8px 18px rgba(153,60,29,.25);}
-  .footer-social a:hover svg{fill:#fff;}
-  footer .copyright{margin-top:6px;font-size:11px;letter-spacing:.02em;}
+  /* ---------- SITEWIDE FOOTER ---------- */
+  .site-footer{position:relative;margin-top:64px;background:linear-gradient(180deg,#2E2440,#241B33);color:rgba(255,255,255,.82);overflow:hidden;}
+  .site-footer::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,var(--coral),var(--sun),var(--mint-deep),var(--sky-deep),var(--lilac-deep));
+  }
+  .footer-inner{max-width:960px;margin:0 auto;padding:52px 24px 28px;}
+  .footer-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.12);}
+  @media(max-width:720px){.footer-top{grid-template-columns:1fr;gap:30px;text-align:center;}}
+  .footer-brand-logo{display:inline-flex;align-items:flex-end;font-family:'Baloo 2',cursive;font-weight:800;font-size:22px;color:#fff;position:relative;padding-bottom:5px;background-image:linear-gradient(#FFC857,#FFC857);background-repeat:no-repeat;background-position:0 100%;background-size:100% 3px;}
+  .footer-brand-logo .logo-i-stem{background:#fff;}
+  .footer-brand-text{margin:14px 0 0;font-size:13.5px;font-weight:700;line-height:1.7;color:rgba(255,255,255,.62);max-width:280px;}
+  @media(max-width:720px){.footer-brand-text{margin-left:auto;margin-right:auto;}}
+  .footer-col-title{font-family:'Baloo 2',cursive;font-weight:700;font-size:15px;color:#fff;margin:0 0 16px;}
+  .footer-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .footer-links button{background:none;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;color:rgba(255,255,255,.68);padding:0;transition:color .2s ease;}
+  .footer-links button:hover{color:var(--sun);}
+  .footer-social{display:flex;gap:12px;flex-wrap:wrap;}
+  @media(max-width:720px){.footer-social{justify-content:center;}}
+  .footer-social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:transform .2s ease, background .2s ease;flex-shrink:0;}
+  .footer-social a svg{width:17px;height:17px;fill:#fff;}
+  .footer-social a:hover{transform:translateY(-3px);background:var(--coral);}
+  .footer-contact-mini{margin-top:18px;font-size:13px;font-weight:800;color:rgba(255,255,255,.68);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;}
+  .footer-contact-mini:hover{color:var(--sun);}
+  .footer-bottom{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding-top:22px;font-size:12px;font-weight:700;color:rgba(255,255,255,.5);line-height:1.7;}
+  .footer-bottom .copyright{font-size:11px;letter-spacing:.02em;color:rgba(255,255,255,.4);}
 
   /* ---------- CONTACT MODAL ---------- */
   .modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(46,36,64,.45);align-items:center;justify-content:center;padding:20px;}
@@ -381,8 +451,20 @@
 <div class="nav">
   <div class="nav-inner">
     <a class="nav-logo" href="#" onclick="return false;">
-      <img src="haegin-logo.png" alt="Haegin" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-      <span class="nav-logo-fallback">Haegin</span>
+      <img src="haegin-logo.png" alt="Haegin" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+      <span class="nav-logo-fallback logo-word" aria-label="Haegin">
+        <span>HAEG</span><span class="logo-i"><span class="logo-i-stem"></span><svg class="logo-sun" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="4.4" fill="#FFC857"/>
+          <g stroke="#FFC857" stroke-width="2.3" stroke-linecap="round">
+            <line x1="12" y1="1.4" x2="12" y2="4.2"/>
+            <line x1="12" y1="19.8" x2="12" y2="22.6"/>
+            <line x1="1.4" y1="12" x2="4.2" y2="12"/>
+            <line x1="19.8" y1="12" x2="22.6" y2="12"/>
+            <line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/>
+            <line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/>
+          </g>
+        </svg></span><span>N</span>
+      </span>
     </a>
     <div class="nav-tabs">
       <button class="nav-tab active" data-tab="home" data-i18n="nav-home">Homepage</button>
@@ -425,16 +507,42 @@
     <div class="blob b2"></div>
     <div class="blob b3"></div>
     <div class="blob b4"></div>
-    <span class="eyebrow" data-i18n="hero-eyebrow">Play Together • Player card</span>
-    <h1>Raijin</h1>
-    <div class="hero-avatar" id="heroAvatarWrap" onclick="openLightbox('rai.jpg')">
-      <img id="heroAvatarImg" src="rai.jpg" alt="Raijin" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
-      <div class="hero-avatar-fallback">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg>
-        <span>Add rai.jpg</span>
+    <div class="profile-card">
+      <span class="eyebrow" data-i18n="hero-eyebrow">Play Together • Player card</span>
+      <h1 class="profile-name">
+        Raijin
+        <svg class="verified-badge" viewBox="0 0 24 24" fill="var(--sky-deep)" aria-label="Verified">
+          <path d="M12 1.6l2.6 1.9 3.2-.3 1.1 3 2.9 1.5-.7 3.2.7 3.2-2.9 1.5-1.1 3-3.2-.3L12 21.2l-2.6-1.9-3.2.3-1.1-3-2.9-1.5.7-3.2-.7-3.2 2.9-1.5 1.1-3 3.2.3z"/>
+          <path d="M8.4 12.2l2.4 2.3 4.8-5.1" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </h1>
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar" id="heroAvatarWrap" onclick="openLightbox('rai.jpg')">
+          <img id="heroAvatarImg" src="rai.jpg" alt="Raijin" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">
+          <div class="hero-avatar-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-3-2-6 5"/></svg>
+            <span>Add rai.jpg</span>
+          </div>
+        </div>
+        <span class="status-dot-avatar" title="Active now"></span>
+        <span class="level-chip-avatar" data-i18n="profile-level-chip">Lv. 26</span>
+      </div>
+      <p class="tag" data-i18n="hero-tag">Collecting pets on the island since Feb 2021</p>
+      <div class="profile-pills">
+        <span class="profile-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z"/></svg>
+          <span data-i18n="profile-pill-server">Asia Server</span>
+        </span>
+        <span class="profile-pill is-rank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8l4 3 5-6 5 6 4-3-2 10H5L3 8z"/></svg>
+          <span data-i18n="profile-pill-rank">#1 Zombie Rank</span>
+        </span>
+        <span class="profile-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>
+          <span data-i18n="profile-pill-since">Since 2021</span>
+        </span>
       </div>
     </div>
-    <p class="tag" data-i18n="hero-tag">Collecting pets on the island since Feb 2021</p>
   </div>
 
   <div class="wrap">
@@ -644,17 +752,6 @@
       </div>
     </div>
 
-    <footer>
-      <div class="footer-social">
-        <a href="https://www.tiktok.com/@raijiin_005" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.02 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a>
-        <a href="https://www.instagram.com/raijin.pt/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.93 4.93 0 0 1-1.15 1.77 4.93 4.93 0 0 1-1.77 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.93 4.93 0 0 1-1.77-1.15 4.93 4.93 0 0 1-1.15-1.77c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.22 1.15-1.77A4.93 4.93 0 0 1 5.44 2.53c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2zm0 1.8c-2.67 0-2.99.01-4.04.06-.87.04-1.34.18-1.66.31-.42.16-.72.35-1.03.66-.31.31-.5.61-.66 1.03-.13.32-.27.79-.31 1.66-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.87.18 1.34.31 1.66.16.42.35.72.66 1.03.31.31.61.5 1.03.66.32.13.79.27 1.66.31 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.87-.04 1.34-.18 1.66-.31.42-.16.72-.35 1.03-.66.31-.31.5-.61.66-1.03.13-.32.27-.79.31-1.66.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.87-.18-1.34-.31-1.66a2.76 2.76 0 0 0-.66-1.03 2.76 2.76 0 0 0-1.03-.66c-.32-.13-.79-.27-1.66-.31C14.99 3.81 14.67 3.8 12 3.8zm0 3.06a5.14 5.14 0 1 1 0 10.28 5.14 5.14 0 0 1 0-10.28zm0 1.8a3.34 3.34 0 1 0 0 6.68 3.34 3.34 0 0 0 0-6.68zm5.34-1.99a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
-        <a href="https://www.facebook.com/profile.php?id=100089546732261" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.33-.04-1.5-.14-2.73-.14C11.29 2 9.5 3.66 9.5 6.7v2.8H7v4h2.5V22h4v-8.5z"/></svg></a>
-      </div>
-      <span data-i18n="footer-disclaimer">Interactive web design page for Play Together — not affiliated with or endorsed by Haegin.</span><br>
-      <span data-i18n="footer-edit-note">Edit the numbers, images, and timeline text in this file to keep it up to date.</span>
-      <div class="copyright" data-i18n="footer-copyright">© 2026 PlayTogether - Raijin. All rights reserved.</div>
-    </footer>
-
   </div>
 </section>
 
@@ -849,17 +946,56 @@
         </div>
       </div>
     </div>
-    <footer>
-      <div class="footer-social">
-        <a href="https://www.tiktok.com/@raijiin_005" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.02 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a>
-        <a href="https://www.instagram.com/raijin.pt/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.93 4.93 0 0 1-1.15 1.77 4.93 4.93 0 0 1-1.77 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.93 4.93 0 0 1-1.77-1.15 4.93 4.93 0 0 1-1.15-1.77c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.22 1.15-1.77A4.93 4.93 0 0 1 5.44 2.53c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2zm0 1.8c-2.67 0-2.99.01-4.04.06-.87.04-1.34.18-1.66.31-.42.16-.72.35-1.03.66-.31.31-.5.61-.66 1.03-.13.32-.27.79-.31 1.66-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.87.18 1.34.31 1.66.16.42.35.72.66 1.03.31.31.61.5 1.03.66.32.13.79.27 1.66.31 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.87-.04 1.34-.18 1.66-.31.42-.16.72-.35 1.03-.66.31-.31.5-.61.66-1.03.13-.32.27-.79.31-1.66.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.87-.18-1.34-.31-1.66a2.76 2.76 0 0 0-.66-1.03 2.76 2.76 0 0 0-1.03-.66c-.32-.13-.79-.27-1.66-.31C14.99 3.81 14.67 3.8 12 3.8zm0 3.06a5.14 5.14 0 1 1 0 10.28 5.14 5.14 0 0 1 0-10.28zm0 1.8a3.34 3.34 0 1 0 0 6.68 3.34 3.34 0 0 0 0-6.68zm5.34-1.99a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
-        <a href="https://www.facebook.com/profile.php?id=100089546732261" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.33-.04-1.5-.14-2.73-.14C11.29 2 9.5 3.66 9.5 6.7v2.8H7v4h2.5V22h4v-8.5z"/></svg></a>
-      </div>
-      <span data-i18n="footer-disclaimer">Fan-made stats page for Play Together by Haegin — not affiliated with or endorsed by Haegin.</span>
-      <div class="copyright" data-i18n="footer-copyright">© 2026 Raijin. All rights reserved.</div>
-    </footer>
   </div>
 </section>
+
+<!-- ============ SITEWIDE FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="footer-brand-logo" aria-label="Haegin">
+          <span>HAEG</span><span class="logo-i"><span class="logo-i-stem"></span><svg class="logo-sun" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4.4" fill="#FFC857"/>
+            <g stroke="#FFC857" stroke-width="2.3" stroke-linecap="round">
+              <line x1="12" y1="1.4" x2="12" y2="4.2"/>
+              <line x1="12" y1="19.8" x2="12" y2="22.6"/>
+              <line x1="1.4" y1="12" x2="4.2" y2="12"/>
+              <line x1="19.8" y1="12" x2="22.6" y2="12"/>
+              <line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/>
+              <line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/>
+            </g>
+          </svg></span><span>N</span>
+        </span>
+        <p class="footer-brand-text" data-i18n="footer-brand-text">A Play Together player card for Raijin — tracking pets, ranks, and milestones on the Asia server since 2021.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title" data-i18n="footer-quicklinks">Quick links</h4>
+        <ul class="footer-links">
+          <li><button onclick="goToTab('home')" data-i18n="nav-home">Homepage</button></li>
+          <li><button onclick="goToTab('about')" data-i18n="nav-about">About me</button></li>
+          <li><button onclick="goToTab('news')" data-i18n="nav-news">News</button></li>
+          <li><button onclick="goToTab('derby')" data-i18n="nav-derby">Derby</button></li>
+          <li><button onclick="goToTab('collection')" data-i18n="nav-collection">Collection</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title" data-i18n="footer-follow">Follow along</h4>
+        <div class="footer-social">
+          <a href="https://www.tiktok.com/@raijiin_005" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.02 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a>
+          <a href="https://www.instagram.com/raijin.pt/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.93 4.93 0 0 1-1.15 1.77 4.93 4.93 0 0 1-1.77 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.93 4.93 0 0 1-1.77-1.15 4.93 4.93 0 0 1-1.15-1.77c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.22 1.15-1.77A4.93 4.93 0 0 1 5.44 2.53c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2zm0 1.8c-2.67 0-2.99.01-4.04.06-.87.04-1.34.18-1.66.31-.42.16-.72.35-1.03.66-.31.31-.5.61-.66 1.03-.13.32-.27.79-.31 1.66-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.87.18 1.34.31 1.66.16.42.35.72.66 1.03.31.31.61.5 1.03.66.32.13.79.27 1.66.31 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.87-.04 1.34-.18 1.66-.31.42-.16.72-.35 1.03-.66.31-.31.5-.61.66-1.03.13-.32.27-.79.31-1.66.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.87-.18-1.34-.31-1.66a2.76 2.76 0 0 0-.66-1.03 2.76 2.76 0 0 0-1.03-.66c-.32-.13-.79-.27-1.66-.31C14.99 3.81 14.67 3.8 12 3.8zm0 3.06a5.14 5.14 0 1 1 0 10.28 5.14 5.14 0 0 1 0-10.28zm0 1.8a3.34 3.34 0 1 0 0 6.68 3.34 3.34 0 0 0 0-6.68zm5.34-1.99a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
+          <a href="https://www.facebook.com/profile.php?id=100089546732261" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.33-.04-1.5-.14-2.73-.14C11.29 2 9.5 3.66 9.5 6.7v2.8H7v4h2.5V22h4v-8.5z"/></svg></a>
+        </div>
+        <button class="footer-contact-mini" onclick="openContact()" data-i18n="nav-contact">Contact me</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer-disclaimer">Fan-made stats page for Play Together by Haegin — not affiliated with or endorsed by Haegin.</span>
+      <span data-i18n="footer-edit-note">Edit the numbers, images, and timeline text in this file to keep it up to date.</span>
+      <div class="copyright" data-i18n="footer-copyright">© 2026 Raijin. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
 
 <!-- ============ CONTACT MODAL ============ -->
 <div class="modal-overlay" id="contactModal" onclick="if(event.target===this) closeContact();">
@@ -910,6 +1046,7 @@
       'nav-home':'Homepage','nav-about':'About me','nav-news':'News','nav-derby':'Derby','nav-collection':'Collection','nav-activities':'Activities','nav-drawing':'Drawing','nav-cosplay':'Cosplay','nav-contact':'Contact me',
       'nav-auto':'Auto','nav-marine':'Marine','nav-moto':'Moto','nav-aerial':'Aerial',
       'hero-eyebrow':'Play Together • Player card','hero-tag':'Collecting pets on the island since Feb 2021',
+      'profile-level-chip':'Lv. 26','profile-pill-server':'Asia Server','profile-pill-rank':'#1 Zombie Rank','profile-pill-since':'Since 2021',
       'badge-title':'#1 Zombie — Asia server','badge-sub':'Top ranked',
       'level-label':'Level 26','level-xp':'25 / 30 XP to Level 27',
       'stats-heading':'My Play Together stats','stats-sub':'Numbers updated every week',
@@ -932,6 +1069,8 @@
       'tl2026':'Reached 30,000 Zombie Wins on the Asia server — currently defending the Rank 1 spot. Retirement is near',
       'footer-disclaimer':'Fan-made stats page for Play Together by Haegin — not affiliated with or endorsed by Haegin.',
       'footer-edit-note':'Edit the numbers, images, and timeline text in this file to keep it up to date.','footer-copyright':'© 2026 Raijin. All rights reserved.',
+      'footer-brand-text':'A Play Together player card for Raijin — tracking pets, ranks, and milestones on the Asia server since 2021.',
+      'footer-quicklinks':'Quick links','footer-follow':'Follow along',
       'derby-heading':'Derby','derby-sub':'My derby wins and best runs',
       'collection-heading':'Collection','collection-sub':"Everything I've collected on the KAIA island so far",
       'pets-heading':'Pets','pets-sub':'956 total, 167 combined — screenshots coming soon',
@@ -953,6 +1092,7 @@
       'nav-home':'Trang chủ','nav-about':'Giới thiệu','nav-news':'Tin tức','nav-derby':'Đua ngựa','nav-collection':'Bộ sưu tập','nav-activities':'Hoạt động','nav-drawing':'Vẽ tranh','nav-cosplay':'Cosplay','nav-contact':'Liên hệ',
       'nav-auto':'Ô tô','nav-marine':'Tàu thuyền','nav-moto':'Mô tô','nav-aerial':'Máy bay',
       'hero-eyebrow':'Play Together • Thẻ người chơi','hero-tag':'Sưu tầm thú cưng trên đảo từ tháng 2/2021',
+      'profile-level-chip':'Cấp 26','profile-pill-server':'Máy chủ Châu Á','profile-pill-rank':'Hạng #1 Zombie','profile-pill-since':'Từ năm 2021',
       'badge-title':'#1 Zombie — Máy chủ Châu Á','badge-sub':'Hạng cao nhất',
       'level-label':'Cấp 26','level-xp':'25 / 30 XP để lên Cấp 27',
       'stats-heading':'Thống kê Play Together của tôi','stats-sub':'Số liệu cập nhật mỗi tuần',
@@ -975,6 +1115,8 @@
       'tl2026':'Đạt 30.000 lượt thắng Zombie trên máy chủ Châu Á — hiện đang bảo vệ vị trí Hạng 1. Sắp đến lúc nghỉ hưu',
       'footer-disclaimer':'Trang thống kê fan-made cho Play Together của Haegin — không liên kết hay được Haegin xác nhận.',
       'footer-edit-note':'Chỉnh sửa số liệu, hình ảnh và nội dung dòng thời gian trong file này để cập nhật.','footer-copyright':'© 2026 Raijin. Đã đăng ký bản quyền.',
+      'footer-brand-text':'Thẻ người chơi Play Together của Raijin — theo dõi thú cưng, thứ hạng và cột mốc trên máy chủ Châu Á từ năm 2021.',
+      'footer-quicklinks':'Liên kết nhanh','footer-follow':'Theo dõi tại',
       'derby-heading':'Đua ngựa','derby-sub':'Các chiến thắng đua ngựa và những lượt chạy hay nhất của tôi',
       'collection-heading':'Bộ sưu tập','collection-sub':'Mọi thứ tôi đã sưu tầm được trên đảo KAIA cho đến nay',
       'pets-heading':'Thú cưng','pets-sub':'956 tổng cộng, 167 kết hợp — ảnh chụp màn hình sắp có',
@@ -996,6 +1138,7 @@
       'nav-home':'หน้าแรก','nav-about':'เกี่ยวกับฉัน','nav-news':'ข่าวสาร','nav-derby':'ดาร์บี้','nav-collection':'คอลเลกชัน','nav-activities':'กิจกรรม','nav-drawing':'วาดภาพ','nav-cosplay':'คอสเพลย์','nav-contact':'ติดต่อฉัน',
       'nav-auto':'รถยนต์','nav-marine':'เรือ','nav-moto':'มอเตอร์ไซค์','nav-aerial':'เครื่องบิน',
       'hero-eyebrow':'Play Together • การ์ดผู้เล่น','hero-tag':'สะสมสัตว์เลี้ยงบนเกาะตั้งแต่ก.พ. 2021',
+      'profile-level-chip':'เลเวล 26','profile-pill-server':'เซิร์ฟเวอร์เอเชีย','profile-pill-rank':'อันดับ #1 ซอมบี้','profile-pill-since':'ตั้งแต่ปี 2021',
       'badge-title':'#1 ซอมบี้ — เซิร์ฟเวอร์เอเชีย','badge-sub':'อันดับสูงสุด',
       'level-label':'เลเวล 26','level-xp':'25 / 30 XP สู่เลเวล 27',
       'stats-heading':'สถิติ Play Together ของฉัน','stats-sub':'อัปเดตตัวเลขทุกสัปดาห์',
@@ -1018,6 +1161,8 @@
       'tl2026':'ทำชัยชนะซอมบี้ถึง 30,000 ครั้งบนเซิร์ฟเวอร์เอเชีย — ปัจจุบันกำลังป้องกันตำแหน่งอันดับ 1 อยู่ ใกล้ถึงเวลาเกษียณแล้ว',
       'footer-disclaimer':'เพจสถิติที่แฟนคลับสร้างขึ้นสำหรับ Play Together โดย Haegin — ไม่ได้เกี่ยวข้องหรือได้รับการรับรองจาก Haegin',
       'footer-edit-note':'แก้ไขตัวเลข รูปภาพ และข้อความไทม์ไลน์ในไฟล์นี้เพื่อให้ทันสมัยอยู่เสมอ','footer-copyright':'© 2026 Raijin สงวนลิขสิทธิ์',
+      'footer-brand-text':'การ์ดผู้เล่น Play Together ของ Raijin — ติดตามสัตว์เลี้ยง อันดับ และเหตุการณ์สำคัญบนเซิร์ฟเวอร์เอเชียตั้งแต่ปี 2021',
+      'footer-quicklinks':'ลิงก์ด่วน','footer-follow':'ติดตามที่',
       'derby-heading':'ดาร์บี้','derby-sub':'ชัยชนะดาร์บี้และการวิ่งที่ดีที่สุดของฉัน',
       'collection-heading':'คอลเลกชัน','collection-sub':'ทุกอย่างที่ฉันสะสมมาบนเกาะ KAIA จนถึงตอนนี้',
       'pets-heading':'สัตว์เลี้ยง','pets-sub':'รวม 956 ตัว ผสมพันธุ์แล้ว 167 ตัว — ภาพหน้าจอเร็วๆ นี้',
