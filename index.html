@@ -201,16 +201,23 @@
 
   /* ---------- RANK CLIMB ---------- */
   .rank-climb{display:flex;flex-direction:column;gap:14px;}
-  .rank-step{display:flex;align-items:center;gap:18px;background:var(--card);border-radius:20px;padding:16px 20px;box-shadow:0 4px 14px rgba(46,36,64,.05);}
+  .rank-step{display:flex;flex-wrap:wrap;align-items:center;gap:18px;background:var(--card);border-radius:20px;padding:16px 20px;box-shadow:0 4px 14px rgba(46,36,64,.05);}
   .rank-step.current{border:2px solid var(--gold);background:linear-gradient(135deg,#FFF7E0,#fff);}
   .rank-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--plum);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:15px;}
   .rank-step.current .rank-num{background:var(--gold);color:#5A3E00;}
   .rank-thumb{flex-shrink:0;width:64px;height:64px;border-radius:16px;border:2px dashed rgba(46,36,64,.18);display:flex;align-items:center;justify-content:center;color:var(--muted);background:#FAF7F2;}
   .rank-thumb svg{width:24px;height:24px;}
-  .rank-info{flex:1;}
+  .rank-info{flex:1 1 240px;min-width:0;}
   .rank-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:17px;}
   .rank-note{font-size:13px;color:var(--muted);font-weight:700;}
-  .rank-tag{flex-shrink:0;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--gold);color:#5A3E00;padding:5px 12px;border-radius:999px;}
+  .rank-tag{flex-shrink:0;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--gold);color:#5A3E00;padding:5px 12px;border-radius:999px;margin-left:auto;}
+  @media(max-width:640px){
+    .rank-step{padding:14px 16px;gap:12px;}
+    .rank-num{order:1;}
+    .rank-thumb{order:2;}
+    .rank-tag{order:3;margin-left:auto;}
+    .rank-info{order:4;flex:1 1 100%;width:100%;margin-top:2px;}
+  }
 
   /* ---------- TROPHY (single image) ---------- */
   .trophy-card{
@@ -242,6 +249,34 @@
   .gallery-caption .name{font-family:'Baloo 2',cursive;font-weight:700;font-size:15px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
   .gallery-caption .meta{font-size:13px;color:var(--muted);font-weight:700;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 
+  /* ---------- VIP BEARS CAROUSEL ---------- */
+  .vip-carousel{position:relative;padding:0 46px;}
+  .vip-carousel-track{
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    padding:10px 4px 20px;-ms-overflow-style:none;scrollbar-width:none;
+  }
+  .vip-carousel-track::-webkit-scrollbar{display:none;}
+  .vip-card{
+    position:relative;flex:0 0 auto;width:190px;aspect-ratio:4/3;border-radius:16px;overflow:hidden;
+    background:#FAF7F2;scroll-snap-align:center;box-shadow:0 6px 16px rgba(46,36,64,.12);
+    transition:transform .35s ease, box-shadow .35s ease, filter .35s ease;
+    filter:brightness(.72) saturate(.85);transform:scale(.92);
+  }
+  .vip-card img{width:100%;height:100%;object-fit:cover;display:none;}
+  .vip-card .vip-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--lilac),var(--mint));color:var(--lilac-deep);}
+  .vip-card .vip-fallback svg{width:34px;height:34px;}
+  .vip-card.is-active{filter:brightness(1) saturate(1);transform:scale(1.08);box-shadow:0 16px 34px rgba(46,36,64,.28);z-index:2;}
+  .vip-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
+    background:rgba(46,36,64,.85);color:#fff;border:none;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;z-index:3;transition:background .2s ease, transform .2s ease;
+  }
+  .vip-arrow:hover{background:var(--plum);transform:translateY(-50%) scale(1.08);}
+  .vip-arrow svg{width:18px;height:18px;}
+  .vip-arrow-prev{left:0;}
+  .vip-arrow-next{right:0;}
+  @media(max-width:640px){.vip-carousel{padding:0 40px;}.vip-card{width:150px;}.vip-arrow{width:34px;height:34px;}}
+
   /* ---------- POLAROID GALLERY (Drawing) ---------- */
   .polaroid-grid{display:flex;flex-wrap:wrap;gap:34px 28px;justify-content:center;padding:16px 6px 20px;}
   .polaroid-card{
@@ -270,11 +305,14 @@
 
   /* ---------- ANIME BACKDROP (Cosplay) ---------- */
   .cosplay-backdrop{
-    position:relative;border-radius:28px;overflow:hidden;padding:34px 20px 26px;
+    position:relative;border-radius:28px;overflow:hidden;padding:44px 20px 32px;
+    box-shadow:inset 0 0 90px rgba(0,0,0,.4), 0 20px 46px rgba(46,36,64,.28);
     background:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,.18) 0, transparent 40%),
-      repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.05) 0deg 4deg, transparent 4deg 12deg),
-      linear-gradient(135deg,#2E2440 0%,#493A6B 45%,#7A5AA8 75%,#FF8C7A 100%);
+      radial-gradient(circle at 12% 10%, rgba(255,140,122,.4), transparent 42%),
+      radial-gradient(circle at 90% 18%, rgba(217,204,255,.4), transparent 45%),
+      radial-gradient(circle at 50% 105%, rgba(255,200,87,.3), transparent 55%),
+      repeating-conic-gradient(from 0deg at 50% 0%, rgba(255,255,255,.07) 0deg 2.2deg, transparent 2.2deg 9deg),
+      linear-gradient(135deg,#241934 0%,#3B2E5C 42%,#7A5AA8 75%,#FF8C7A 100%);
   }
   .cosplay-backdrop::before{
     content:'';position:absolute;inset:0;pointer-events:none;
@@ -284,12 +322,51 @@
     background-size:120px 120px, 160px 160px;
     background-position:0 0, 60px 80px;
     animation:sparkleDrift 14s linear infinite;
-    opacity:.5;
+    opacity:.55;
+  }
+  .cosplay-backdrop::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 120%, rgba(0,0,0,.45), transparent 60%);
   }
   @keyframes sparkleDrift{from{background-position:0 0, 60px 80px;}to{background-position:-240px 240px, -180px 320px;}}
+  .cosplay-kicker{position:relative;z-index:1;text-align:center;margin:0 0 22px;}
+  .cosplay-kicker span{
+    display:inline-flex;align-items:center;gap:6px;font-family:'Baloo 2',cursive;font-weight:700;
+    font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+    padding:7px 16px;border-radius:999px;backdrop-filter:blur(4px);
+  }
   .cosplay-backdrop .gallery-grid{position:relative;z-index:1;}
-  .cosplay-backdrop .gallery-card{background:rgba(255,255,255,.95);}
+  .cosplay-backdrop .gallery-card{
+    position:relative;background:rgba(255,255,255,.97);border-radius:22px;
+    border:3px solid transparent;
+    background-image:linear-gradient(rgba(255,255,255,.97),rgba(255,255,255,.97)),
+      linear-gradient(135deg,var(--coral),var(--lilac-deep));
+    background-origin:border-box;background-clip:padding-box, border-box;
+    box-shadow:0 10px 24px rgba(0,0,0,.32);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .cosplay-backdrop .gallery-card:nth-child(2){
+    background-image:linear-gradient(rgba(255,255,255,.97),rgba(255,255,255,.97)),
+      linear-gradient(135deg,var(--sun),var(--coral-deep));
+  }
+  .cosplay-backdrop .gallery-card:nth-child(3){
+    background-image:linear-gradient(rgba(255,255,255,.97),rgba(255,255,255,.97)),
+      linear-gradient(135deg,var(--sky),var(--sky-deep));
+  }
+  .cosplay-backdrop .gallery-card:nth-child(4){
+    background-image:linear-gradient(rgba(255,255,255,.97),rgba(255,255,255,.97)),
+      linear-gradient(135deg,var(--mint),var(--mint-deep));
+  }
+  .cosplay-backdrop .gallery-card:hover{transform:translateY(-6px) scale(1.03) rotate(-.4deg);box-shadow:0 20px 42px rgba(0,0,0,.42),0 0 26px rgba(255,140,122,.4);}
+  .cosplay-backdrop .gallery-card::before{
+    content:'★';position:absolute;top:-11px;right:-9px;width:28px;height:28px;z-index:2;
+    background:var(--sun);color:#5A3E00;border-radius:50%;border:2px solid #fff;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+    box-shadow:0 4px 10px rgba(0,0,0,.3);
+  }
   .cosplay-backdrop .gallery-thumb{background:#FAF7F2;}
+  .cosplay-backdrop .gallery-caption .name{color:var(--lilac-deep);}
 
   /* ---------- ACTIVITIES SUB-TABS ---------- */
   .sub-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
@@ -835,10 +912,31 @@
 
     <h3 class="subsection-heading"><span class="dot-tag" style="background:var(--lilac-deep);"></span><span data-i18n="vip-heading">VIP bears</span></h3>
     <p class="subsection-sub" data-i18n="vip-sub">Screenshots coming soon</p>
-    <div class="gallery-grid">
-      <div class="gallery-card"><div class="gallery-thumb"><img src="vip-bear-1.jpg" alt="VIP bear #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"></div><div class="gallery-caption"><div class="name">VIP bear #1</div><div class="meta">Add name + edition</div></div></div>
-      <div class="gallery-card"><div class="gallery-thumb"><img src="vip-bear-2.jpg" alt="VIP bear #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"></div><div class="gallery-caption"><div class="name">VIP bear #2</div><div class="meta">Add name + edition</div></div></div>
-      <div class="gallery-card"><div class="gallery-thumb"><img src="vip-bear-3.jpg" alt="VIP bear #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"></div><div class="gallery-caption"><div class="name">VIP bear #3</div><div class="meta">Add name + edition</div></div></div>
+    <div class="vip-carousel">
+      <button class="vip-arrow vip-arrow-prev" onclick="vipScroll(-1)" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="vip-carousel-track" id="vipTrack">
+        <div class="vip-card is-active" onclick="openLightbox('vip-bear-1.jpg')"><img src="vip-bear-1.jpg" alt="VIP bear #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-2.jpg')"><img src="vip-bear-2.jpg" alt="VIP bear #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-3.jpg')"><img src="vip-bear-3.jpg" alt="VIP bear #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-4.jpg')"><img src="vip-bear-4.jpg" alt="VIP bear #4" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-5.jpg')"><img src="vip-bear-5.jpg" alt="VIP bear #5" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-6.jpg')"><img src="vip-bear-6.jpg" alt="VIP bear #6" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-7.jpg')"><img src="vip-bear-7.jpg" alt="VIP bear #7" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-8.jpg')"><img src="vip-bear-8.jpg" alt="VIP bear #8" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-9.jpg')"><img src="vip-bear-9.jpg" alt="VIP bear #9" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-10.jpg')"><img src="vip-bear-10.jpg" alt="VIP bear #10" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-11.jpg')"><img src="vip-bear-11.jpg" alt="VIP bear #11" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-12.jpg')"><img src="vip-bear-12.jpg" alt="VIP bear #12" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-13.jpg')"><img src="vip-bear-13.jpg" alt="VIP bear #13" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-14.jpg')"><img src="vip-bear-14.jpg" alt="VIP bear #14" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-15.jpg')"><img src="vip-bear-15.jpg" alt="VIP bear #15" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('vip-bear-16.jpg')"><img src="vip-bear-16.jpg" alt="VIP bear #16" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+      </div>
+      <button class="vip-arrow vip-arrow-next" onclick="vipScroll(1)" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -873,6 +971,7 @@
 
     <div class="sub-panel" id="subtab-cosplay">
       <div class="cosplay-backdrop">
+        <p class="cosplay-kicker"><span>✨ Character Cosplay ✨</span></p>
         <div class="gallery-grid">
           <div class="gallery-card"><div class="gallery-thumb"><img src="cos1.jpg" alt="Cosplay #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"></div><div class="gallery-caption"><div class="name">Chocolove</div><div class="meta">Shaman King</div></div></div>
           <div class="gallery-card"><div class="gallery-thumb"><img src="cos2.jpg" alt="Cosplay #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"></div><div class="gallery-caption"><div class="name">Pouf</div><div class="meta">Hunter Hunter</div></div></div>
@@ -981,7 +1080,7 @@
         </ul>
       </div>
       <div>
-        <h4 class="footer-col-title" data-i18n="footer-follow">Follow along</h4>
+        <h4 class="footer-col-title" data-i18n="footer-follow">Follow me here</h4>
         <div class="footer-social">
           <a href="https://www.tiktok.com/@raijiin_005" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.02 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a>
           <a href="https://www.instagram.com/raijin.pt/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.93 4.93 0 0 1-1.15 1.77 4.93 4.93 0 0 1-1.77 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.93 4.93 0 0 1-1.77-1.15 4.93 4.93 0 0 1-1.15-1.77c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.22 1.15-1.77A4.93 4.93 0 0 1 5.44 2.53c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2zm0 1.8c-2.67 0-2.99.01-4.04.06-.87.04-1.34.18-1.66.31-.42.16-.72.35-1.03.66-.31.31-.5.61-.66 1.03-.13.32-.27.79-.31 1.66-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.87.18 1.34.31 1.66.16.42.35.72.66 1.03.31.31.61.5 1.03.66.32.13.79.27 1.66.31 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.87-.04 1.34-.18 1.66-.31.42-.16.72-.35 1.03-.66.31-.31.5-.61.66-1.03.13-.32.27-.79.31-1.66.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.87-.18-1.34-.31-1.66a2.76 2.76 0 0 0-.66-1.03 2.76 2.76 0 0 0-1.03-.66c-.32-.13-.79-.27-1.66-.31C14.99 3.81 14.67 3.8 12 3.8zm0 3.06a5.14 5.14 0 1 1 0 10.28 5.14 5.14 0 0 1 0-10.28zm0 1.8a3.34 3.34 0 1 0 0 6.68 3.34 3.34 0 0 0 0-6.68zm5.34-1.99a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
@@ -1037,6 +1136,28 @@
     document.getElementById('lightboxImg').src = src;
     document.getElementById('lightboxOverlay').classList.add('open');
   }
+  function vipScroll(dir){
+    const track = document.getElementById('vipTrack');
+    if(!track) return;
+    const card = track.querySelector('.vip-card');
+    if(!card) return;
+    const gap = parseFloat(getComputedStyle(track).columnGap || 14);
+    track.scrollBy({left:(card.offsetWidth+gap)*dir, behavior:'smooth'});
+  }
+  (function initVipCarousel(){
+    const track = document.getElementById('vipTrack');
+    if(!track || !('IntersectionObserver' in window)) return;
+    const cards = [...track.querySelectorAll('.vip-card')];
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
+          cards.forEach(c=>c.classList.remove('is-active'));
+          entry.target.classList.add('is-active');
+        }
+      });
+    }, {root:track, threshold:[0.6,0.9]});
+    cards.forEach(c=>io.observe(c));
+  })();
   function closeLightbox(){
     document.getElementById('lightboxOverlay').classList.remove('open');
   }
