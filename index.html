@@ -59,9 +59,10 @@
   .logo-i-stem{width:5px;height:76%;background:currentColor;border-radius:2px;}
   .logo-sun{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:14px;height:14px;overflow:visible;}
   .nav-tabs{display:flex;gap:6px;flex-wrap:wrap;}
-  .nav-tab{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--muted);background:none;border:none;cursor:pointer;padding:8px 14px;border-radius:999px;transition:all .2s ease;}
+  .nav-tab{position:relative;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--muted);background:none;border:none;cursor:pointer;padding:8px 14px;border-radius:999px;transition:all .2s ease;}
   .nav-tab:hover{background:var(--mint);color:var(--mint-deep);}
-  .nav-tab.active{background:var(--plum);color:#fff;}
+  .nav-tab.active{background:var(--plum);color:#fff;box-shadow:0 4px 14px rgba(46,36,64,.3), 0 0 0 1px rgba(255,200,87,.4);}
+  .nav-tab.active::after{content:'';position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--sun);box-shadow:0 0 8px 2px rgba(255,183,3,.7);}
 
   .nav-item-dropdown{position:relative;}
   .nav-item-dropdown > .nav-tab{pointer-events:none;cursor:default;}
@@ -133,7 +134,13 @@
   }
   .verified-badge{width:22px;height:22px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(24,95,165,.35));}
   .hero-avatar-wrap{position:relative;width:104px;margin:6px auto 22px;}
-  .hero-avatar-wrap .hero-avatar{margin:0;}
+  .hero-avatar-wrap::before{
+    content:'';position:absolute;inset:-6px;border-radius:28px;z-index:0;
+    background:conic-gradient(from 0deg,var(--coral),var(--sun),var(--mint-deep),var(--sky-deep),var(--lilac-deep),var(--coral));
+    animation:spinFrame 5s linear infinite;
+  }
+  @keyframes spinFrame{to{transform:rotate(360deg);}}
+  .hero-avatar-wrap .hero-avatar{margin:0;z-index:1;}
   .status-dot-avatar{
     position:absolute;top:0;right:-2px;width:17px;height:17px;border-radius:50%;
     background:#2ECC71;border:3px solid #fff;box-shadow:0 0 0 3px rgba(46,204,113,.22);
@@ -147,7 +154,9 @@
     padding:3px 11px;border-radius:999px;border:3px solid #fff;
     box-shadow:0 4px 10px rgba(255,183,3,.4);white-space:nowrap;
     z-index:2;
+    animation:levelGlow 2.4s ease-in-out infinite;
   }
+  @keyframes levelGlow{0%,100%{box-shadow:0 4px 10px rgba(255,183,3,.4);}50%{box-shadow:0 4px 10px rgba(255,183,3,.4),0 0 14px 3px rgba(255,183,3,.5);}}
   .profile-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px;}
   .profile-pill{
     display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;
@@ -183,7 +192,8 @@
   .badge .badge-sub{font-size:13px;font-weight:700;color:#7A5A0E;text-transform:uppercase;letter-spacing:.04em;}
 
   /* ---------- SECTION HEADINGS ---------- */
-  .section-heading{text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:26px;margin:60px 0 8px;}
+  .section-heading{position:relative;text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:26px;margin:60px 0 8px;padding-bottom:14px;}
+  .section-heading::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:46px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--coral),var(--sun));box-shadow:0 0 10px rgba(255,140,122,.55);}
   .section-sub{text-align:center;color:var(--muted);font-weight:700;margin:0 0 36px;font-size:14px;}
   .subsection-heading{font-family:'Baloo 2',cursive;font-weight:700;font-size:20px;margin:44px 0 4px;display:flex;align-items:center;gap:10px;}
   .subsection-sub{color:var(--muted);font-weight:700;margin:0 0 20px;font-size:13px;}
@@ -191,8 +201,10 @@
 
   /* ---------- STATS ---------- */
   .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px;}
-  .stat-card{background:var(--card);border-radius:var(--radius);padding:28px 18px;text-align:center;box-shadow:0 6px 18px rgba(46,36,64,.06);transition:transform .25s ease;}
-  .stat-card:hover{transform:translateY(-6px);}
+  .stat-card{position:relative;background:var(--card);border-radius:var(--radius);padding:28px 18px;text-align:center;box-shadow:0 6px 18px rgba(46,36,64,.06);transition:transform .25s ease,box-shadow .25s ease;border:2px solid transparent;overflow:hidden;}
+  .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--coral),var(--sun),var(--sky),var(--lilac-deep));opacity:0;transition:opacity .25s ease;}
+  .stat-card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(46,36,64,.16);border-color:rgba(255,183,3,.35);}
+  .stat-card:hover::before{opacity:1;}
   .icon-circle{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
   .icon-circle svg{width:32px;height:32px;}
   .ic-coral{background:#FFE6E0;} .ic-coral svg{stroke:var(--coral-deep);}
@@ -527,13 +539,25 @@
 
   /* ---------- NEWS ---------- */
   .news-list{display:flex;flex-direction:column;gap:16px;max-width:680px;margin:0 auto;}
-  .news-card{display:flex;gap:18px;background:var(--card);border-radius:22px;padding:20px 22px;box-shadow:0 6px 18px rgba(46,36,64,.06);transition:transform .25s ease,box-shadow .25s ease;}
-  .news-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(46,36,64,.12);}
+  .news-card{display:flex;gap:18px;background:var(--card);border-radius:22px;padding:20px 22px;box-shadow:0 6px 18px rgba(46,36,64,.06);transition:transform .25s ease,box-shadow .25s ease;border-left:5px solid var(--coral);}
+  .news-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 14px 30px rgba(46,36,64,.14);}
+  .news-card.tag-milestone{border-left-color:var(--gold);}
+  .news-card.tag-gacha{border-left-color:var(--lilac-deep);}
+  .news-card.tag-merge{border-left-color:var(--mint-deep);}
+  .news-card.tag-catch{border-left-color:var(--sky-deep);}
+  .news-card.tag-event{border-left-color:var(--coral);}
+  .news-card.tag-update{border-left-color:var(--plum);}
   .news-date{flex-shrink:0;width:64px;text-align:center;background:var(--mint);border-radius:14px;padding:8px 4px;color:var(--mint-deep);}
   .news-date .d-num{display:block;font-family:'Baloo 2',cursive;font-weight:800;font-size:20px;line-height:1;}
   .news-date .d-mon{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;}
   .news-body .news-title{font-family:'Baloo 2',cursive;font-weight:700;font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .news-tag{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:var(--coral);color:#fff;padding:3px 10px;border-radius:999px;}
+  .news-tag{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:var(--coral);color:#fff;padding:3px 10px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12);}
+  .news-tag.tag-milestone{background:linear-gradient(135deg,var(--sun),var(--gold));color:#5A3E00;}
+  .news-tag.tag-gacha{background:linear-gradient(135deg,var(--lilac-deep),#8A7CE0);color:#fff;}
+  .news-tag.tag-merge{background:linear-gradient(135deg,var(--mint-deep),#17A784);color:#fff;}
+  .news-tag.tag-catch{background:linear-gradient(135deg,var(--sky-deep),#3F8FDB);color:#fff;}
+  .news-tag.tag-event{background:linear-gradient(135deg,var(--coral-deep),var(--coral));color:#fff;}
+  .news-tag.tag-update{background:linear-gradient(135deg,var(--plum),#4A3D68);color:#fff;}
   .news-body p{margin:0;font-size:13.5px;color:var(--muted);font-weight:700;line-height:1.6;}
 
   /* ---------- LIGHTBOX ---------- */
@@ -1012,52 +1036,52 @@
     <p class="section-sub" data-i18n="news-sub">My latest news </p>
 
     <div class="news-list">
-      <div class="news-card">
+      <div class="news-card tag-milestone">
         <div class="news-date"><span class="d-num">08</span><span class="d-mon" data-i18n="news6-mon">Aug</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news6-title">Completed all 120/120 cards</span><span class="news-tag" data-i18n="news-tag-milestone">Milestone</span></div>
+          <div class="news-title"><span data-i18n="news6-title">Completed all 120/120 cards</span><span class="news-tag tag-milestone" data-i18n="news-tag-milestone">Milestone</span></div>
           <p data-i18n="news6-text">Earned the AURORAPING Wings and advanced to the next level of the card event.</p>
         </div>
       </div>
-      <div class="news-card">
+      <div class="news-card tag-merge">
         <div class="news-date"><span class="d-num">07</span><span class="d-mon" data-i18n="news7-mon">Aug</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news7-title">Combined a Black Tortoise</span><span class="news-tag" data-i18n="news-tag-milestone">Merge</span></div>
+          <div class="news-title"><span data-i18n="news7-title">Combined a Black Tortoise</span><span class="news-tag tag-merge" data-i18n="news-tag-merge">Merge</span></div>
           <p data-i18n="news7-text">Successfully combined a new event pet and proudly added it to my home</p>
         </div>
       </div>
-      <div class="news-card">
+      <div class="news-card tag-merge">
         <div class="news-date"><span class="d-num">06</span><span class="d-mon" data-i18n="news8-mon">Aug</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news8-title">Combined a new White Tiger pet</span><span class="news-tag" data-i18n="news-tag-milestone">Merge</span></div>
+          <div class="news-title"><span data-i18n="news8-title">Combined a new White Tiger pet</span><span class="news-tag tag-merge" data-i18n="news-tag-merge">Merge</span></div>
           <p data-i18n="news8-text">Successfully combined a new event pet and proudly added it to my home</p>
         </div>
       </div>
-      <div class="news-card">
+      <div class="news-card tag-gacha">
         <div class="news-date"><span class="d-num">27</span><span class="d-mon" data-i18n="news1-mon">Jul</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news1-title">Got the Princess Darkness Wings in just 1 draw</span><span class="news-tag" data-i18n="news-tag-gacha">Gacha</span></div>
+          <div class="news-title"><span data-i18n="news1-title">Got the Princess Darkness Wings in just 1 draw</span><span class="news-tag tag-gacha" data-i18n="news-tag-gacha">Gacha</span></div>
           <p data-i18n="news1-text">Pulled the Princess Darkness Wings outfit on the very first try — an incredibly lucky single draw.</p>
         </div>
       </div>
-      <div class="news-card">
+      <div class="news-card tag-catch">
         <div class="news-date"><span class="d-num">27</span><span class="d-mon" data-i18n="news2-mon">Jul</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news2-title">Caught the Beluga Sturgeon Aurora</span><span class="news-tag" data-i18n="news-tag-catch">Catch</span></div>
+          <div class="news-title"><span data-i18n="news2-title">Caught the Beluga Sturgeon Aurora</span><span class="news-tag tag-catch" data-i18n="news-tag-catch">Catch</span></div>
           <p data-i18n="news2-text">Reeled in a rare Beluga Sturgeon Aurora while fishing — one of the rarest catches yet.</p>
         </div>
       </div>
-      <div class="news-card">
+      <div class="news-card tag-event">
         <div class="news-date"><span class="d-num">25</span><span class="d-mon" data-i18n="news3-mon">Jul</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news3-title">Done the Princess Heart event</span><span class="news-tag" data-i18n="news-tag-event">Event</span></div>
+          <div class="news-title"><span data-i18n="news3-title">Done the Princess Heart event</span><span class="news-tag tag-event" data-i18n="news-tag-event">Event</span></div>
           <p data-i18n="news3-text">Completed all stages of the Princess Heart event and claimed the rewards.</p>
         </div>
       </div>
-      <div class="news-card">
+      <div class="news-card tag-update">
         <div class="news-date"><span class="d-num">18</span><span class="d-mon" data-i18n="news5-mon">Jun</span></div>
         <div class="news-body">
-          <div class="news-title"><span data-i18n="news5-title">Page redesigned</span><span class="news-tag" data-i18n="news-tag-update">Update</span></div>
+          <div class="news-title"><span data-i18n="news5-title">Page redesigned</span><span class="news-tag tag-update" data-i18n="news-tag-update">Update</span></div>
           <p data-i18n="news5-text">Added a News tab, language switcher, and a smoother timeline so friends can follow along more easily.</p>
         </div>
       </div>
@@ -1189,17 +1213,37 @@
   }
   (function initVipCarousel(){
     const track = document.getElementById('vipTrack');
-    if(!track || !('IntersectionObserver' in window)) return;
+    if(!track) return;
     const cards = [...track.querySelectorAll('.vip-card')];
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          cards.forEach(c=>c.classList.remove('is-active'));
-          entry.target.classList.add('is-active');
+    if(!cards.length) return;
+
+    let ticking = false;
+    function updateActiveCard(){
+      ticking = false;
+      const trackRect = track.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      let closest = null;
+      let closestDist = Infinity;
+      cards.forEach(c => {
+        const r = c.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const dist = Math.abs(cardCenter - trackCenter);
+        if(dist < closestDist){
+          closestDist = dist;
+          closest = c;
         }
       });
-    }, {root:track, threshold:[0.6,0.9]});
-    cards.forEach(c=>io.observe(c));
+      cards.forEach(c => c.classList.toggle('is-active', c === closest));
+    }
+    function requestUpdate(){
+      if(!ticking){
+        ticking = true;
+        requestAnimationFrame(updateActiveCard);
+      }
+    }
+    track.addEventListener('scroll', requestUpdate, {passive:true});
+    window.addEventListener('resize', requestUpdate);
+    updateActiveCard();
   })();
   function closeLightbox(){
     document.getElementById('lightboxOverlay').classList.remove('open');
@@ -1254,7 +1298,7 @@
       'news2-mon':'Jul','news2-title':'Caught the Beluga Sturgeon Aurora','news2-text':'Reeled in a rare Beluga Sturgeon Aurora while fishing — one of the rarest catches yet.',
       'news3-mon':'Jul','news3-title':'Done the Princess Heart event','news3-text':'Completed all stages of the Princess Heart event and claimed the rewards.',
       'news5-mon':'Jun','news5-title':'Page redesigned','news5-text':'Added a News tab, language switcher, and a smoother timeline so friends can follow along more easily.',
-      'news-tag-milestone':'Milestone','news-tag-update':'Update','news-tag-derby':'Derby','news-tag-gacha':'Gacha','news-tag-catch':'Catch','news-tag-event':'Event'
+      'news-tag-milestone':'Milestone','news-tag-update':'Update','news-tag-derby':'Derby','news-tag-gacha':'Gacha','news-tag-catch':'Catch','news-tag-event':'Event','news-tag-merge':'Merge'
     },
     vi: {
       'nav-home':'Trang chủ','nav-about':'Giới thiệu','nav-news':'Tin tức','nav-derby':'Đua ngựa','nav-collection':'Bộ sưu tập','nav-activities':'Hoạt động','nav-drawing':'Vẽ tranh','nav-cosplay':'Cosplay','nav-contact':'Liên hệ',
@@ -1303,7 +1347,7 @@
       'news2-mon':'Th7','news2-title':'Câu được cá Beluga Sturgeon Aurora','news2-text':'Câu được cá Beluga Sturgeon Aurora hiếm trong lúc câu cá — một trong những lần câu hiếm nhất từ trước đến nay.',
       'news3-mon':'Th7','news3-title':'Hoàn thành sự kiện Princess Heart','news3-text':'Hoàn thành tất cả các chặng của sự kiện Princess Heart và nhận phần thưởng.',
       'news5-mon':'Th6','news5-title':'Trang web được thiết kế lại','news5-text':'Thêm tab Tin tức, bộ chuyển đổi ngôn ngữ và dòng thời gian mượt mà hơn để bạn bè dễ theo dõi hơn.',
-      'news-tag-milestone':'Cột mốc','news-tag-update':'Cập nhật','news-tag-derby':'Đua ngựa','news-tag-gacha':'Quay thưởng','news-tag-catch':'Câu cá','news-tag-event':'Sự kiện'
+      'news-tag-milestone':'Cột mốc','news-tag-update':'Cập nhật','news-tag-derby':'Đua ngựa','news-tag-gacha':'Quay thưởng','news-tag-catch':'Câu cá','news-tag-event':'Sự kiện','news-tag-merge':'Ghép'
     },
     th: {
       'nav-home':'หน้าแรก','nav-about':'เกี่ยวกับฉัน','nav-news':'ข่าวสาร','nav-derby':'ดาร์บี้','nav-collection':'คอลเลกชัน','nav-activities':'กิจกรรม','nav-drawing':'วาดภาพ','nav-cosplay':'คอสเพลย์','nav-contact':'ติดต่อฉัน',
@@ -1352,7 +1396,7 @@
       'news2-mon':'ก.ค.','news2-title':'จับปลา Beluga Sturgeon Aurora ได้','news2-text':'ตกปลา Beluga Sturgeon Aurora ตัวหายากได้ระหว่างตกปลา — หนึ่งในการจับที่หายากที่สุด',
       'news3-mon':'ก.ค.','news3-title':'ทำอีเวนต์ Princess Heart สำเร็จ','news3-text':'ผ่านทุกด่านของอีเวนต์ Princess Heart และรับรางวัลเรียบร้อยแล้ว',
       'news5-mon':'มิ.ย.','news5-title':'ออกแบบเพจใหม่','news5-text':'เพิ่มแท็บข่าวสาร ตัวสลับภาษา และไทม์ไลน์ที่ลื่นไหลขึ้นเพื่อให้เพื่อนๆ ติดตามได้ง่ายขึ้น',
-      'news-tag-milestone':'เหตุการณ์สำคัญ','news-tag-update':'อัปเดต','news-tag-derby':'ดาร์บี้','news-tag-gacha':'สุ่มไอเทม','news-tag-catch':'จับปลา','news-tag-event':'อีเวนต์'
+      'news-tag-milestone':'เหตุการณ์สำคัญ','news-tag-update':'อัปเดต','news-tag-derby':'ดาร์บี้','news-tag-gacha':'สุ่มไอเทม','news-tag-catch':'จับปลา','news-tag-event':'อีเวนต์','news-tag-merge':'ผสมพันธุ์'
     }
   };
 
