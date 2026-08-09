@@ -88,7 +88,8 @@
   }
   .dropdown-link svg{width:17px;height:17px;flex-shrink:0;color:var(--coral-deep);}
   .dropdown-link:hover{background:var(--mint);}
-  .contact-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;background:var(--coral);color:#fff;border:none;cursor:pointer;padding:9px 18px;border-radius:999px;flex-shrink:0;transition:transform .2s ease;}
+  .contact-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;background:var(--coral);color:#fff;border:none;cursor:pointer;padding:9px 18px;border-radius:999px;flex-shrink:0;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 4px 12px rgba(255,140,122,.35);}
+  .contact-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,140,122,.5);}
   .contact-btn:hover{transform:translateY(-2px);}
 
   /* ---------- LANGUAGE SWITCHER ---------- */
@@ -234,8 +235,9 @@
 
   /* ---------- RANK CLIMB ---------- */
   .rank-climb{display:flex;flex-direction:column;gap:14px;}
-  .rank-step{display:flex;flex-wrap:wrap;align-items:center;gap:18px;background:var(--card);border-radius:20px;padding:16px 20px;box-shadow:0 4px 14px rgba(46,36,64,.05);}
-  .rank-step.current{border:2px solid var(--gold);background:linear-gradient(135deg,#FFF7E0,#fff);}
+  .rank-step{display:flex;flex-wrap:wrap;align-items:center;gap:18px;background:var(--card);border-radius:20px;padding:16px 20px;box-shadow:0 4px 14px rgba(46,36,64,.05);transition:box-shadow .3s ease;}
+  .rank-step.current{border:2px solid var(--gold);background:linear-gradient(135deg,#FFF7E0,#fff);box-shadow:0 4px 14px rgba(46,36,64,.05),0 0 0 4px rgba(255,183,3,.14);animation:rankGlow 2.6s ease-in-out infinite;}
+  @keyframes rankGlow{0%,100%{box-shadow:0 4px 14px rgba(46,36,64,.05),0 0 0 4px rgba(255,183,3,.1);}50%{box-shadow:0 4px 14px rgba(46,36,64,.05),0 0 0 7px rgba(255,183,3,.22);}}
   .rank-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--plum);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:15px;}
   .rank-step.current .rank-num{background:var(--gold);color:#5A3E00;}
   .rank-thumb{flex-shrink:0;width:64px;height:64px;border-radius:16px;border:2px dashed rgba(46,36,64,.18);display:flex;align-items:center;justify-content:center;color:var(--muted);background:#FAF7F2;}
@@ -272,7 +274,8 @@
   /* ---------- GALLERY ---------- */
   .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;}
   @media(max-width:720px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
-  .gallery-card{display:flex;flex-direction:column;height:100%;background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(46,36,64,.06);}
+  .gallery-card{display:flex;flex-direction:column;height:100%;background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(46,36,64,.06);transition:transform .3s ease,box-shadow .3s ease;}
+  .gallery-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(46,36,64,.16);}
   .gallery-thumb{position:relative;aspect-ratio:4/3;flex-shrink:0;background:#FAF7F2;border-bottom:2px dashed rgba(46,36,64,.12);overflow:hidden;}
   .gallery-thumb img{width:100%;height:100%;object-fit:contain;display:none;}
   .gallery-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);}
@@ -285,7 +288,7 @@
   /* ---------- VIP BEARS CAROUSEL ---------- */
   .vip-carousel{position:relative;padding:0 46px;}
   .vip-carousel-track{
-    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
     padding:10px 4px 20px;-ms-overflow-style:none;scrollbar-width:none;
   }
   .vip-carousel-track::-webkit-scrollbar{display:none;}
@@ -1214,12 +1217,35 @@
   (function initVipCarousel(){
     const track = document.getElementById('vipTrack');
     if(!track) return;
+    const originalCards = [...track.querySelectorAll('.vip-card')];
+    if(!originalCards.length) return;
+    const setCount = originalCards.length;
+
+    // Clone the full set before and after the originals so scrolling
+    // in either direction always has more cards waiting — the illusion
+    // of an endless carousel.
+    function cloneSet(){
+      return originalCards.map(c => {
+        const clone = c.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        return clone;
+      });
+    }
+    const beforeClones = cloneSet();
+    const afterClones = cloneSet();
+    beforeClones.reverse().forEach(c => track.insertBefore(c, track.firstChild));
+    afterClones.forEach(c => track.appendChild(c));
+
     const cards = [...track.querySelectorAll('.vip-card')];
-    if(!cards.length) return;
+
+    let setWidth = 0;
+    function measureSetWidth(){
+      if(cards.length <= setCount) return track.scrollWidth;
+      return cards[setCount].offsetLeft - cards[0].offsetLeft;
+    }
 
     let ticking = false;
     function updateActiveCard(){
-      ticking = false;
       const trackRect = track.getBoundingClientRect();
       const trackCenter = trackRect.left + trackRect.width / 2;
       let closest = null;
@@ -1235,15 +1261,42 @@
       });
       cards.forEach(c => c.classList.toggle('is-active', c === closest));
     }
+
+    function handleLoop(){
+      if(!setWidth) return;
+      // Once scrolled past a full set into the clones on either side,
+      // silently jump back by exactly one set width. Since the clone
+      // set is visually identical to the real one, the jump is invisible.
+      if(track.scrollLeft < setWidth){
+        track.scrollLeft += setWidth;
+      } else if(track.scrollLeft >= setWidth * 2){
+        track.scrollLeft -= setWidth;
+      }
+    }
+
     function requestUpdate(){
       if(!ticking){
         ticking = true;
-        requestAnimationFrame(updateActiveCard);
+        requestAnimationFrame(() => {
+          updateActiveCard();
+          handleLoop();
+          ticking = false;
+        });
       }
     }
+
     track.addEventListener('scroll', requestUpdate, {passive:true});
-    window.addEventListener('resize', requestUpdate);
-    updateActiveCard();
+    window.addEventListener('resize', () => { setWidth = measureSetWidth(); });
+
+    // Wait a frame for layout (and image loads) to settle before measuring
+    // and positioning the track at the start of the real (middle) set.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setWidth = measureSetWidth();
+        track.scrollLeft = setWidth;
+        updateActiveCard();
+      });
+    });
   })();
   function closeLightbox(){
     document.getElementById('lightboxOverlay').classList.remove('open');
