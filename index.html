@@ -111,12 +111,12 @@
   .eyebrow{position:relative;z-index:1;display:inline-block;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint-deep);background:var(--mint);padding:6px 16px;border-radius:999px;margin-bottom:18px;}
   .hero h1{position:relative;z-index:1;font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(38px,7vw,60px);margin:0 0 10px;}
   .hero p.tag{position:relative;z-index:1;font-size:16px;font-weight:700;color:var(--muted);margin:0;}
-  .hero-avatar{position:relative;z-index:1;width:104px;height:104px;border-radius:24px;margin:6px auto 14px;overflow:hidden;border:4px solid #fff;box-shadow:0 8px 22px rgba(46,36,64,.16);cursor:zoom-in;transition:transform .2s ease;background:linear-gradient(135deg,var(--mint),var(--sky));}
-  .hero-avatar:hover{transform:scale(1.04);}
+  .hero-avatar{position:relative;z-index:1;width:104px;height:104px;border-radius:24px;margin:6px auto 14px;overflow:hidden;border:4px solid #fff;box-shadow:0 8px 22px rgba(46,36,64,.16);cursor:zoom-in;transition:transform .2s ease, box-shadow .2s ease;background:linear-gradient(135deg,var(--mint),var(--sky));}
+  .hero-avatar:hover{transform:scale(1.04);box-shadow:0 10px 26px rgba(46,36,64,.22);}
   .hero-avatar img{width:100%;height:100%;object-fit:cover;display:none;}
-  .hero-avatar-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--plum);}
-  .hero-avatar-fallback svg{width:26px;height:26px;}
-  .hero-avatar-fallback span{font-size:10px;font-weight:800;}
+  .hero-avatar-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mint-deep);background:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 10px,transparent 10px 20px);}
+  .hero-avatar-fallback svg{width:28px;height:28px;}
+  .hero-avatar-fallback span{font-size:10px;font-weight:800;background:rgba(255,255,255,.75);padding:3px 8px;border-radius:999px;letter-spacing:.01em;}
 
   /* ---------- PROFILE CARD ---------- */
   .profile-card{
@@ -124,6 +124,7 @@
     background:linear-gradient(180deg,#ffffff,#FFFCF5);
     border-radius:30px;padding:26px 26px 24px;
     box-shadow:0 18px 42px rgba(46,36,64,.12), 0 0 0 1px rgba(46,36,64,.04);
+    transition:transform .3s ease, box-shadow .3s ease;
   }
   .profile-name{
     position:relative;z-index:1;font-family:'Baloo 2',cursive;font-weight:800;
@@ -131,19 +132,21 @@
     display:flex;align-items:center;justify-content:center;gap:8px;
   }
   .verified-badge{width:22px;height:22px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(24,95,165,.35));}
-  .hero-avatar-wrap{position:relative;width:104px;margin:6px auto 4px;}
+  .hero-avatar-wrap{position:relative;width:104px;margin:6px auto 22px;}
   .hero-avatar-wrap .hero-avatar{margin:0;}
   .status-dot-avatar{
     position:absolute;top:0;right:-2px;width:17px;height:17px;border-radius:50%;
     background:#2ECC71;border:3px solid #fff;box-shadow:0 0 0 3px rgba(46,204,113,.22);
     animation:pulseDot 1.8s ease-in-out infinite;
+    z-index:2;
   }
   .level-chip-avatar{
-    position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+    position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
     background:linear-gradient(135deg,var(--gold),var(--sun));color:#5A3E00;
     font-family:'Baloo 2',cursive;font-weight:800;font-size:12px;letter-spacing:.02em;
     padding:3px 11px;border-radius:999px;border:3px solid #fff;
     box-shadow:0 4px 10px rgba(255,183,3,.4);white-space:nowrap;
+    z-index:2;
   }
   .profile-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px;}
   .profile-pill{
@@ -154,11 +157,29 @@
   .profile-pill.is-rank{color:var(--sun-deep);background:#FFF3D6;}
   .profile-pill.is-rank svg{stroke:var(--sun-deep);}
 
+  /* ---------- PROFILE SECTION RESPONSIVE ---------- */
+  @media(max-width:480px){
+    .hero{padding:36px 14px 22px;}
+    .profile-card{max-width:100%;padding:20px 16px 18px;border-radius:24px;}
+    .eyebrow{font-size:11.5px;padding:5px 13px;margin-bottom:14px;}
+    .profile-name{font-size:clamp(26px,8vw,34px);gap:6px;}
+    .verified-badge{width:18px;height:18px;}
+    .hero p.tag{font-size:13.5px;padding:0 6px;}
+    .profile-pills{gap:6px;margin-top:14px;}
+    .profile-pill{font-size:10.5px;padding:5px 10px;}
+  }
+  @media(min-width:1024px){
+    .profile-card{max-width:400px;}
+    .profile-card:hover{transform:translateY(-4px);box-shadow:0 26px 56px rgba(46,36,64,.16), 0 0 0 1px rgba(46,36,64,.05);}
+    .badge:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,183,3,.32);}
+  }
+
   /* ---------- BADGE ---------- */
-  .badge-section{display:flex;justify-content:center;margin:32px 0 10px;position:relative;z-index:1;}
-  .badge{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#FFE9B0,var(--sun));border:3px solid var(--gold);border-radius:999px;padding:14px 28px 14px 18px;box-shadow:0 8px 20px rgba(255,183,3,.25);}
+  .badge-section{display:flex;justify-content:center;margin:32px 0 10px;position:relative;z-index:1;padding:0 16px;}
+  .badge{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#FFE9B0,var(--sun));border:3px solid var(--gold);border-radius:999px;padding:14px 28px 14px 18px;box-shadow:0 8px 20px rgba(255,183,3,.25);max-width:100%;flex-wrap:wrap;justify-content:center;transition:transform .25s ease, box-shadow .25s ease;}
   .badge .crown{width:42px;height:42px;flex-shrink:0;}
-  .badge .badge-title{font-family:'Baloo 2',cursive;font-weight:700;font-size:20px;color:var(--sun-deep);line-height:1.1;}
+  .badge .badge-text{min-width:0;}
+  .badge .badge-title{font-family:'Baloo 2',cursive;font-weight:700;font-size:20px;color:var(--sun-deep);line-height:1.25;overflow-wrap:break-word;}
   .badge .badge-sub{font-size:13px;font-weight:700;color:#7A5A0E;text-transform:uppercase;letter-spacing:.04em;}
 
   /* ---------- SECTION HEADINGS ---------- */
@@ -544,7 +565,7 @@
       </span>
     </a>
     <div class="nav-tabs">
-      <button class="nav-tab active" data-tab="home" data-i18n="nav-home">Homepage</button>
+      <button class="nav-tab active" data-tab="home" data-i18n="nav-home">Home</button>
       <button class="nav-tab" data-tab="about" data-i18n="nav-about">About me</button>
       <button class="nav-tab" data-tab="news" data-i18n="nav-news">News</button>
       <button class="nav-tab" data-tab="derby" data-i18n="nav-derby">Derby</button>
@@ -917,22 +938,22 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
       <div class="vip-carousel-track" id="vipTrack">
-        <div class="vip-card is-active" onclick="openLightbox('vip-bear-1.jpg')"><img src="vip-bear-1.jpg" alt="VIP bear #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-2.jpg')"><img src="vip-bear-2.jpg" alt="VIP bear #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-3.jpg')"><img src="vip-bear-3.jpg" alt="VIP bear #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-4.jpg')"><img src="vip-bear-4.jpg" alt="VIP bear #4" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-5.jpg')"><img src="vip-bear-5.jpg" alt="VIP bear #5" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-6.jpg')"><img src="vip-bear-6.jpg" alt="VIP bear #6" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-7.jpg')"><img src="vip-bear-7.jpg" alt="VIP bear #7" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-8.jpg')"><img src="vip-bear-8.jpg" alt="VIP bear #8" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-9.jpg')"><img src="vip-bear-9.jpg" alt="VIP bear #9" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-10.jpg')"><img src="vip-bear-10.jpg" alt="VIP bear #10" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-11.jpg')"><img src="vip-bear-11.jpg" alt="VIP bear #11" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-12.jpg')"><img src="vip-bear-12.jpg" alt="VIP bear #12" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-13.jpg')"><img src="vip-bear-13.jpg" alt="VIP bear #13" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-14.jpg')"><img src="vip-bear-14.jpg" alt="VIP bear #14" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-15.jpg')"><img src="vip-bear-15.jpg" alt="VIP bear #15" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
-        <div class="vip-card" onclick="openLightbox('vip-bear-16.jpg')"><img src="vip-bear-16.jpg" alt="VIP bear #16" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card is-active" onclick="openLightbox('Vip15.png')"><img src="Vip16.png" alt="VIP bear #1" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip.png')"><img src="vip-bear-2.jpg" alt="VIP bear #2" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip1.png')"><img src="vip-bear-3.jpg" alt="VIP bear #3" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip2.png')"><img src="vip-bear-4.jpg" alt="VIP bear #4" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip3.png')"><img src="vip-bear-5.jpg" alt="VIP bear #5" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip4.png')"><img src="vip-bear-6.jpg" alt="VIP bear #6" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip5.png')"><img src="vip-bear-7.jpg" alt="VIP bear #7" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip6.png')"><img src="vip-bear-8.jpg" alt="VIP bear #8" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip7.png')"><img src="vip-bear-9.jpg" alt="VIP bear #9" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip8.png')"><img src="vip-bear-10.jpg" alt="VIP bear #10" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip9.png')"><img src="vip-bear-11.jpg" alt="VIP bear #11" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip10.png')"><img src="vip-bear-12.jpg" alt="VIP bear #12" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip11.png')"><img src="vip-bear-13.jpg" alt="VIP bear #13" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip12.png')"><img src="vip-bear-14.jpg" alt="VIP bear #14" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip13.png')"><img src="vip-bear-15.jpg" alt="VIP bear #15" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
+        <div class="vip-card" onclick="openLightbox('Vip14.png')"><img src="vip-bear-16.jpg" alt="VIP bear #16" onload="this.style.display='block'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none';"><div class="vip-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c1 1 5 1 6 0"/></svg></div></div>
       </div>
       <button class="vip-arrow vip-arrow-next" onclick="vipScroll(1)" aria-label="Next">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
@@ -990,6 +1011,27 @@
     <p class="section-sub" data-i18n="news-sub">The latest from my island — edit these anytime</p>
 
     <div class="news-list">
+      <div class="news-card">
+        <div class="news-date"><span class="d-num">08</span><span class="d-mon" data-i18n="news6-mon">Aug</span></div>
+        <div class="news-body">
+          <div class="news-title"><span data-i18n="news6-title">Completed the full card collection — 120/120!</span><span class="news-tag" data-i18n="news-tag-milestone">Milestone</span></div>
+          <p data-i18n="news6-text">Filled the very last slot in my collection card, hitting a perfect 120 out of 120.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-date"><span class="d-num">07</span><span class="d-mon" data-i18n="news7-mon">Aug</span></div>
+        <div class="news-body">
+          <div class="news-title"><span data-i18n="news7-title">Combined a new Turtle pet</span><span class="news-tag" data-i18n="news-tag-milestone">Milestone</span></div>
+          <p data-i18n="news7-text">Bred a new Turtle pet by combining two pets in the nursery.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-date"><span class="d-num">06</span><span class="d-mon" data-i18n="news8-mon">Aug</span></div>
+        <div class="news-body">
+          <div class="news-title"><span data-i18n="news8-title">Combined a new White Tiger pet</span><span class="news-tag" data-i18n="news-tag-milestone">Milestone</span></div>
+          <p data-i18n="news8-text">Bred a new White Tiger pet — added to the collection this week.</p>
+        </div>
+      </div>
       <div class="news-card">
         <div class="news-date"><span class="d-num">27</span><span class="d-mon" data-i18n="news1-mon">Jul</span></div>
         <div class="news-body">
@@ -1072,7 +1114,7 @@
       <div>
         <h4 class="footer-col-title" data-i18n="footer-quicklinks">Quick links</h4>
         <ul class="footer-links">
-          <li><button onclick="goToTab('home')" data-i18n="nav-home">Homepage</button></li>
+          <li><button onclick="goToTab('home')" data-i18n="nav-home">Home</button></li>
           <li><button onclick="goToTab('about')" data-i18n="nav-about">About me</button></li>
           <li><button onclick="goToTab('news')" data-i18n="nav-news">News</button></li>
           <li><button onclick="goToTab('derby')" data-i18n="nav-derby">Derby</button></li>
@@ -1165,7 +1207,7 @@
   /* ---------- TRANSLATIONS (EN / VN / TH) ---------- */
   const translations = {
     en: {
-      'nav-home':'Homepage','nav-about':'About me','nav-news':'News','nav-derby':'Derby','nav-collection':'Collection','nav-activities':'Activities','nav-drawing':'Drawing','nav-cosplay':'Cosplay','nav-contact':'Contact me',
+      'nav-home':'Home','nav-about':'About me','nav-news':'News','nav-derby':'Derby','nav-collection':'Collection','nav-activities':'Activities','nav-drawing':'Drawing','nav-cosplay':'Cosplay','nav-contact':'Contact me',
       'nav-auto':'Auto','nav-marine':'Marine','nav-moto':'Moto','nav-aerial':'Aerial',
       'hero-eyebrow':'Play Together • Player card','hero-tag':'Collecting pets on the island since Feb 2021',
       'profile-level-chip':'Lv. 26','profile-pill-server':'Asia Server','profile-pill-rank':'#1 Zombie Rank','profile-pill-since':'Since 2021',
@@ -1204,6 +1246,9 @@
       'about-text':'Island builder, pet collector, and reigning #1 zombie on the Asia server. This page tracks my Play Together progress — screenshots going up soon.',
       'about-download-btn':'Download Play Together',
       'news-heading':'News & Updates','news-sub':'The latest from my island — edit these anytime',
+      'news6-mon':'Aug','news6-title':'Completed the full card collection — 120/120!','news6-text':'Filled the very last slot in my collection card, hitting a perfect 120 out of 120.',
+      'news7-mon':'Aug','news7-title':'Combined a new Turtle pet','news7-text':'Bred a new Turtle pet by combining two pets in the nursery.',
+      'news8-mon':'Aug','news8-title':'Combined a new White Tiger pet','news8-text':'Bred a new White Tiger pet — added to the collection this week.',
       'news1-mon':'Jul','news1-title':'Got the Princess Darkness Wings in just 1 draw','news1-text':'Pulled the Princess Darkness Wings outfit on the very first try — an incredibly lucky single draw.',
       'news2-mon':'Jul','news2-title':'Caught the Beluga Sturgeon Aurora','news2-text':'Reeled in a rare Beluga Sturgeon Aurora while fishing — one of the rarest catches yet.',
       'news3-mon':'Jul','news3-title':'Done the Princess Heart event','news3-text':'Completed all stages of the Princess Heart event and claimed the rewards.',
@@ -1250,6 +1295,9 @@
       'about-text':'Người xây đảo, sưu tầm thú cưng, và đang giữ hạng #1 Zombie tại máy chủ Châu Á. Trang này theo dõi tiến trình Play Together của tôi — ảnh chụp màn hình sẽ sớm được cập nhật.',
       'about-download-btn':'Tải Play Together',
       'news-heading':'Tin tức & Cập nhật','news-sub':'Những tin mới nhất từ hòn đảo của tôi — chỉnh sửa bất cứ lúc nào',
+      'news6-mon':'Th8','news6-title':'Hoàn thành bộ sưu tập đầy đủ — 120/120!','news6-text':'Lấp đầy ô cuối cùng trong thẻ bộ sưu tập, đạt đủ 120/120 hoàn hảo.',
+      'news7-mon':'Th8','news7-title':'Lai tạo được thú cưng Rùa mới','news7-text':'Lai ghép hai thú cưng để tạo ra một chú Rùa mới trong khu ấp trứng.',
+      'news8-mon':'Th8','news8-title':'Lai tạo được thú cưng Hổ Trắng mới','news8-text':'Lai tạo được một chú Hổ Trắng mới — thêm vào bộ sưu tập tuần này.',
       'news1-mon':'Th7','news1-title':'Nhận được Princess Darkness Wings chỉ trong 1 lượt quay','news1-text':'Quay trúng trang phục Princess Darkness Wings ngay lần đầu tiên — một lượt quay đơn cực kỳ may mắn.',
       'news2-mon':'Th7','news2-title':'Câu được cá Beluga Sturgeon Aurora','news2-text':'Câu được cá Beluga Sturgeon Aurora hiếm trong lúc câu cá — một trong những lần câu hiếm nhất từ trước đến nay.',
       'news3-mon':'Th7','news3-title':'Hoàn thành sự kiện Princess Heart','news3-text':'Hoàn thành tất cả các chặng của sự kiện Princess Heart và nhận phần thưởng.',
@@ -1296,6 +1344,9 @@
       'about-text':'นักสร้างเกาะ นักสะสมสัตว์เลี้ยง และแชมป์ซอมบี้อันดับ #1 บนเซิร์ฟเวอร์เอเชีย เพจนี้ติดตามความคืบหน้า Play Together ของฉัน — ภาพหน้าจอกำลังจะมาเร็วๆ นี้',
       'about-download-btn':'ดาวน์โหลด Play Together',
       'news-heading':'ข่าวสารและอัปเดต','news-sub':'ข่าวล่าสุดจากเกาะของฉัน — แก้ไขได้ตลอดเวลา',
+      'news6-mon':'ส.ค.','news6-title':'สะสมคอลเลกชันครบสมบูรณ์ — 120/120!','news6-text':'เติมช่องสุดท้ายในการ์ดคอลเลกชันจนครบสมบูรณ์ 120/120',
+      'news7-mon':'ส.ค.','news7-title':'ผสมพันธุ์ได้สัตว์เลี้ยงเต่าตัวใหม่','news7-text':'ผสมพันธุ์สัตว์เลี้ยงสองตัวจนได้เต่าตัวใหม่ในเรือนเพาะพันธุ์',
+      'news8-mon':'ส.ค.','news8-title':'ผสมพันธุ์ได้สัตว์เลี้ยงเสือขาวตัวใหม่','news8-text':'ผสมพันธุ์ได้เสือขาวตัวใหม่ — เพิ่มเข้าคอลเลกชันในสัปดาห์นี้',
       'news1-mon':'ก.ค.','news1-title':'ได้รับ Princess Darkness Wings ในการสุ่มเพียง 1 ครั้ง','news1-text':'สุ่มได้ชุด Princess Darkness Wings ในการสุ่มครั้งแรกเลย — โชคดีสุดๆ',
       'news2-mon':'ก.ค.','news2-title':'จับปลา Beluga Sturgeon Aurora ได้','news2-text':'ตกปลา Beluga Sturgeon Aurora ตัวหายากได้ระหว่างตกปลา — หนึ่งในการจับที่หายากที่สุด',
       'news3-mon':'ก.ค.','news3-title':'ทำอีเวนต์ Princess Heart สำเร็จ','news3-text':'ผ่านทุกด่านของอีเวนต์ Princess Heart และรับรางวัลเรียบร้อยแล้ว',
